@@ -27,36 +27,6 @@
           ],
           "name": "Evaluator",
           "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "MOT Link",
-                  "type": "url",
-                  "url": "https://keybase.io/"
-                },
-                {
-                  "name": "Mechanism/ Legal Ref",
-                  "type": "url",
-                  "url": "http://pgp.mit.edu/"
-                },
-                {
-                  "name": "Mechanism/ Legal Data"
-                }
-              ],
-              "name": "MOT : XX",
-              "type": "folder"
-            },
-            {
-              "name": "PGP MIT : XX",
-              "type": "url",
-              "url": "http://pgp.mit.edu/"
-            }
-          ],
-          "name": "Regulator",
-          "type": "folder"
         }
       ],
       "name": "Road",
@@ -105,27 +75,6 @@
           ],
           "name": "Data Policy",
           "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "name": "List Data"
-            },
-            {
-              "name": "Seo Jin Won"
-            },
-            {
-              "name": "Some Bloke"
-            },
-            {
-              "name": "James Petersen"
-            },
-            {
-              "name": "Peter Schidmt"
-            }
-          ],
-          "name": "MPs",
-          "type": "folder"
         }
       ],
       "name": "Public Transit",
@@ -168,27 +117,6 @@
           ],
           "name": "Pink Party",
           "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "name": "List Data"
-            },
-            {
-              "name": "Seo Jin Won"
-            },
-            {
-              "name": "Some Bloke"
-            },
-            {
-              "name": "James Petersen"
-            },
-            {
-              "name": "Peter Schidmt"
-            }
-          ],
-          "name": "Blue Party",
-          "type": "folder"
         }
       ],
       "name": "Rail",
@@ -199,42 +127,6 @@
         {
           "children": [
             {
-              "children": [
-                {
-                  "name": "Red Bulls : NEG"
-                },
-                {
-                  "name": "Red Necks : POS"
-                },
-                {
-                  "name": "Red Guard : 0"
-                }
-              ],
-              "name": "Internal",
-              "type": "folder"
-            },
-            {
-              "children": [
-                {
-                  "name": "Z"
-                },
-                {
-                  "name": "Y"
-                },
-                {
-                  "name": "X"
-                }
-              ],
-              "name": "Internatinal",
-              "type": "folder"
-            }
-          ],
-          "name": "Business Institutions",
-          "type": "folder"
-        },
-        {
-          "children": [
-            {
               "name": "List Data"
             },
             {
@@ -251,21 +143,6 @@
             }
           ],
           "name": "Academias",
-          "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "name": "Z"
-            },
-            {
-              "name": "Y"
-            },
-            {
-              "name": "X"
-            }
-          ],
-          "name": "Civil Society",
           "type": "folder"
         }
       ],
@@ -274,63 +151,6 @@
     },
     {
       "children": [
-        {
-          "children": [
-            {
-              "children": [
-                {
-                  "name": "Red Bulls : NEG"
-                },
-                {
-                  "name": "Red Necks : POS"
-                },
-                {
-                  "name": "Red Guard : 0"
-                }
-              ],
-              "name": "Internal",
-              "type": "folder"
-            },
-            {
-              "children": [
-                {
-                  "name": "Z"
-                },
-                {
-                  "name": "Y"
-                },
-                {
-                  "name": "X"
-                }
-              ],
-              "name": "Internatinal",
-              "type": "folder"
-            }
-          ],
-          "name": "Business Institutions",
-          "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "name": "List Data"
-            },
-            {
-              "name": "Seo Jin Won"
-            },
-            {
-              "name": "Some Bloke"
-            },
-            {
-              "name": "James Petersen"
-            },
-            {
-              "name": "Peter Schidmt"
-            }
-          ],
-          "name": "Academias",
-          "type": "folder"
-        },
         {
           "children": [
             {
@@ -368,45 +188,9 @@
               ],
               "name": "Internal",
               "type": "folder"
-            },
-            {
-              "children": [
-                {
-                  "name": "Z"
-                },
-                {
-                  "name": "Y"
-                },
-                {
-                  "name": "X"
-                }
-              ],
-              "name": "Internatinal",
-              "type": "folder"
             }
           ],
           "name": "Business Institutions",
-          "type": "folder"
-        },
-        {
-          "children": [
-            {
-              "name": "List Data"
-            },
-            {
-              "name": "Seo Jin Won"
-            },
-            {
-              "name": "Some Bloke"
-            },
-            {
-              "name": "James Petersen"
-            },
-            {
-              "name": "Peter Schidmt"
-            }
-          ],
-          "name": "Academias",
           "type": "folder"
         },
         {
@@ -565,7 +349,252 @@
         "type": "url",
         "url": "http://www.track-trace.com/"
       }],
-      "name": "Transportation",
+      "name": "International Transportation Data",
+      "type": "folder"
+    },
+    {
+      "children": [
+      {
+        "children": [
+        {
+          "name": "SunCalc",
+          "type": "url",
+          "url": "http://suncalc.net/"
+        }],
+        "name": "Geolocation Tools",
+        "type": "folder"
+      },
+      {
+        "children": [
+        {
+          "name": "GPSVisualizer",
+          "type": "url",
+          "url": "http://www.gpsvisualizer.com/geocode"
+        },
+        {
+          "name": "Military Grid Reference System Coordinates",
+          "type": "url",
+          "url": "https://dominoc925-pages.appspot.com/mapplets/cs_mgrs.html"
+        },
+        {
+          "name": "Batch Geocoding",
+          "type": "url",
+          "url": "https://www.doogal.co.uk/BatchGeocoding.php"
+        },
+        {
+          "name": "Batch Reverse Geocoding",
+          "type": "url",
+          "url": "https://www.doogal.co.uk/BatchReverseGeocoding.php"
+        }],
+        "name": "Coordinates",
+        "type": "folder"
+      },
+      {
+        "children": [
+        {
+          "name": "BatchGeo",
+          "type": "url",
+          "url": "https://batchgeo.com/"
+        },
+        {
+          "name": "Hyperlapse (T)",
+          "type": "url",
+          "url": "https://github.com/TeehanLax/Hyperlapse.js"
+        },
+        {
+          "name": "Teehan+Lax Labs - Hyperlapse",
+          "type": "url",
+          "url": "http://labs.teehanlax.com/project/hyperlapse"
+        },
+        {
+          "name": "Google Maps Streetview Player",
+          "type": "url",
+          "url": "http://brianfolts.com/driver/"
+        },
+        {
+          "name": "ScribbleMaps",
+          "type": "url",
+          "url": "http://scribblemaps.com/"
+        }],
+        "name": "Map Reporting Tools",
+        "type": "folder"
+      },
+      {
+        "children": [
+        {
+          "name": "OpenSignal",
+          "type": "url",
+          "url": "https://opensignal.com/"
+        },
+        {
+          "name": "AntennaSearch",
+          "type": "url",
+          "url": "http://www.antennasearch.com/"
+        }],
+        "name": "Mobile Coverage",
+        "type": "folder"
+      },
+      {
+        "name": "Google Maps",
+        "type": "url",
+        "url": "https://www.google.com/maps/"
+      },
+      {
+        "name": "Bing Maps",
+        "type": "url",
+        "url": "http://www.bing.com/maps/"
+      },
+      {
+        "name": "HERE Maps",
+        "type": "url",
+        "url": "https://maps.here.com/"
+      },
+      {
+        "name": "Dual Maps",
+        "type": "url",
+        "url": "http://data.mashedworld.com/dualmaps/map.htm"
+      },
+      {
+        "name": "Instant Google Street View",
+        "type": "url",
+        "url": "http://www.instantstreetview.com/"
+      },
+      {
+        "name": "Wikimapia",
+        "type": "url",
+        "url": "http://wikimapia.org/#lang=en&lat=40.078071&lon=-100.458984&z=5&m=b"
+      },
+      {
+        "name": "OpenStreetMap",
+        "type": "url",
+        "url": "http://www.openstreetmap.org/#map=5/40.614/-100.679"
+      },
+      {
+        "name": "Flash Earth",
+        "type": "url",
+        "url": "http://www.flashearth.com/"
+      },
+      {
+        "name": "Historic Aerials",
+        "type": "url",
+        "url": "http://www.historicaerials.com/?javascript=&"
+      },
+      {
+        "name": "Google Maps Update Alerts",
+        "type": "url",
+        "url": "https://followyourworld.appspot.com/"
+      },
+      {
+        "name": "Google Earth Overlays",
+        "type": "url",
+        "url": "http://www.mgmaps.com/kml/#view"
+      },
+      {
+        "name": "Yandex.Maps",
+        "type": "url",
+        "url": "https://yandex.com/maps/"
+      },
+      {
+        "name": "Google Earth",
+        "type": "url",
+        "url": "https://www.google.com/earth/"
+      },
+      {
+        "name": "Baidu Maps",
+        "type": "url",
+        "url": "http://map.baidu.com/"
+      },
+      {
+        "name": "Corona",
+        "type": "url",
+        "url": "http://corona.cast.uark.edu/"
+      },
+      {
+        "name": "Daum (Korean)",
+        "type": "url",
+        "url": "http://map.daum.net/"
+      },
+      {
+        "name": "Naver (Korean)",
+        "type": "url",
+        "url": "http://map.naver.com/"
+      },
+      {
+        "name": "OpenStreetMap",
+        "type": "url",
+        "url": "http://www.openstreetmap.org/#map=5/51.500/-0.100"
+      },
+      {
+        "name": "EarthExplorer",
+        "type": "url",
+        "url": "https://earthexplorer.usgs.gov/"
+      },
+      {
+        "name": "OpenStreetCam",
+        "type": "url",
+        "url": "http://openstreetcam.org/"
+      },
+      {
+        "name": "Travel by Drone",
+        "type": "url",
+        "url": "http://travelbydrone.com/"
+      },
+      {
+        "name": "Hivemapper",
+        "type": "url",
+        "url": "https://hivemapper.com/"
+      },
+      {
+        "name": "LandsatLook Viewer",
+        "type": "url",
+        "url": "https://landsatlook.usgs.gov/"
+      },
+      {
+        "name": "Sentinel2Look Viewer",
+        "type": "url",
+        "url": "https://landsatlook.usgs.gov/sentinel2/"
+      },
+      {
+        "name": "NEXRAD Data Inventory Search",
+        "type": "url",
+        "url": "https://www.ncdc.noaa.gov/nexradinv/"
+      },
+      {
+        "name": "MapQuest",
+        "type": "url",
+        "url": "https://www.mapquest.com/"
+      },
+      {
+        "name": "OpenRailwayMap",
+        "type": "url",
+        "url": "http://www.openrailwaymap.org/"
+      },
+      {
+        "name": "OpenInfrastructureMap",
+        "type": "url",
+        "url": "openinframap.org/"
+      },
+      {
+        "name": "OpenStreetMap Routing Service",
+        "type": "url",
+        "url": "http://www.yournavigation.org/"
+      },
+      {
+        "name": "Hiking & Biking Map",
+        "type": "url",
+        "url": "http://hikebikemap.org/"
+      },
+      {
+        "name": "US Nav Guide Zip Code Data",
+        "type": "url",
+        "url": "http://www.usnaviguide.com/"
+      },
+      {
+        "name": "Wayback Imagery",
+        "type": "url",
+        "url": "https://livingatlas.arcgis.com/wayback/"
+      }],
+      "name": "Geolocation Tools / Maps",
       "type": "folder"
     }
   ],
