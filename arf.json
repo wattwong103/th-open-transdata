@@ -5,31 +5,87 @@
         {
           "children": [
             {
-              "name": "Department of Revenue",
+              "name": "Department of Land Transport Data Catalog",
               "type": "url",
-              "url": "http://checkusernames.com/"
+              "url": "https://gdcatalog.dlt.go.th",
+              "description": "Vehicle registration, driver licenses, transport operator licenses"
             },
             {
-              "name": "Bank of Investment, Thailand",
+              "name": "Road Domestic Transport Volume",
               "type": "url",
-              "url": "https://namecheckup.com/"
+              "url": "https://uat.data.go.th/en/dataset/road-domestic-transport-volume",
+              "description": "Road freight transport volumes within Thailand"
             },
             {
-              "name": "XYZ",
+              "name": "Department of Highways (DOH)",
               "type": "url",
-              "url": "https://instantusername.com/"
+              "url": "https://data.doh.go.th",
+              "description": "Highway statistics, M-Flow usage, accident cost studies"
             },
             {
-              "name": "ABC",
+              "name": "Department of Rural Roads (DRR)",
               "type": "url",
-              "url": "https://namesdir.com/"
+              "url": "http://dataportal.drr.go.th",
+              "description": "Rural road network data, project information"
+            },
+            {
+              "name": "Expressway Authority of Thailand (EXAT)",
+              "type": "url",
+              "url": "https://catalog.exat.co.th",
+              "description": "Traffic data, annual reports, interesting statistics"
             }
           ],
-          "name": "Evaluator",
+          "name": "Thailand Government Agencies",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Vehicle Purchase Records",
+              "type": "url",
+              "url": "http://vin.place/"
+            },
+            {
+              "name": "VIN Decoderz",
+              "type": "url",
+              "url": "http://www.vindecoderz.com/"
+            },
+            {
+              "name": "That's Them VIN Search",
+              "type": "url",
+              "url": "https://thatsthem.com/vin-search"
+            },
+            {
+              "name": "Reverse Genie License Plates",
+              "type": "url",
+              "url": "http://www.reversegenie.com/plate.php"
+            },
+            {
+              "name": "VinCheck",
+              "type": "url",
+              "url": "https://www.nicb.org/theft_and_fraud_awareness/vincheck"
+            },
+            {
+              "name": "TRAVIC - Public Transportation Tracking",
+              "type": "url",
+              "url": "http://tracker.geops.ch/"
+            },
+            {
+              "name": "Vehicle Specifications Lookup",
+              "type": "url",
+              "url": "https://berla.co/products/ive/vehicle-lookup/"
+            },
+            {
+              "name": "License Plate Search",
+              "type": "url",
+              "url": "https://www.vehiclehistory.com/licence-plate-search/licence-plate.php"
+            }
+          ],
+          "name": "International Vehicle Records",
           "type": "folder"
         }
       ],
-      "name": "Road",
+      "name": "Road Transportation",
       "type": "folder"
     },
     {
@@ -37,47 +93,51 @@
         {
           "children": [
             {
-              "children": [
-                {
-                  "name": "Red Bulls : NEG"
-                },
-                {
-                  "name": "Red Necks : POS"
-                },
-                {
-                  "name": "Red Guard : 0"
-                }
-              ],
-              "name": "Voter Stance",
-              "type": "folder"
+              "name": "State Railway of Thailand Data Catalog",
+              "type": "url",
+              "url": "https://gdc.railway.co.th",
+              "description": "Passenger stations, railway-related information"
             },
             {
-              "children": [
-                {
-                  "name": "Z"
-                },
-                {
-                  "name": "Y"
-                },
-                {
-                  "name": "X"
-                }
-              ],
-              "name": "Future",
-              "type": "folder"
+              "name": "Rail Technology Database",
+              "type": "url",
+              "url": "https://www.rtrda.or.th/en/ผลงานและโครงการเด่น/ฐานข้อมูล-เทคโนโลยี-ระบบ/",
+              "description": "Research, innovations, agencies, experts, rail technology"
             },
             {
-              "name": "Past"
+              "name": "Rail Freight Statistics",
+              "type": "url",
+              "url": "https://gdcatalog.go.th/dataset/gdpublish-stat_freight_rail",
+              "description": "Monthly rail freight transport volume statistics"
             },
             {
-              "name": "Present"
+              "name": "Department of Rail Transport (DRT)",
+              "type": "url",
+              "url": "https://drt.gdcatalog.go.th",
+              "description": "Rail system KPIs, electric train data"
             }
           ],
-          "name": "Data Policy",
+          "name": "Thailand Rail Agencies",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Deutsche Bahn Open-Data-Portal (German)",
+              "type": "url",
+              "url": "http://data.deutschebahn.com/"
+            },
+            {
+              "name": "OpenRailwayMap",
+              "type": "url",
+              "url": "https://www.openrailwaymap.org/"
+            }
+          ],
+          "name": "International Railway Records",
           "type": "folder"
         }
       ],
-      "name": "Public Transit",
+      "name": "Rail Transportation",
       "type": "folder"
     },
     {
@@ -85,41 +145,72 @@
         {
           "children": [
             {
-              "children": [
-                {
-                  "name": "Red Bulls : NEG"
-                },
-                {
-                  "name": "Red Necks : POS"
-                },
-                {
-                  "name": "Red Guard : 0"
-                }
-              ],
-              "name": "Draft",
-              "type": "folder"
+              "name": "Civil Aviation Authority of Thailand",
+              "type": "url",
+              "url": "https://datagov.mot.go.th/en/dataset/?organization=caat",
+              "description": "Flight counts, passenger numbers, aircraft registrations"
             },
             {
-              "children": [
-                {
-                  "name": "Z"
-                },
-                {
-                  "name": "Y"
-                },
-                {
-                  "name": "X"
-                }
-              ],
-              "name": "Argument",
-              "type": "folder"
+              "name": "Airports of Thailand Dataset",
+              "type": "url",
+              "url": "https://data.opendevelopmentmekong.net/en/dataset/airports-of-thailand",
+              "description": "Airport location data, ICAO and IATA codes"
+            },
+            {
+              "name": "Air Transport Volume Data",
+              "type": "url",
+              "url": "https://uat.data.go.th/en/dataset/air-freight-pass",
+              "description": "Flight numbers, passenger counts, freight volumes"
+            },
+            {
+              "name": "Airports of Thailand (AOT)",
+              "type": "url",
+              "url": "https://www.airportthai.co.th",
+              "description": "Annual airport statistics, passenger and cargo data"
+            },
+            {
+              "name": "Department of Airports (DOA)",
+              "type": "url",
+              "url": "http://gdcatalog.airports.go.th",
+              "description": "Flight and passenger statistics for regional airports"
             }
           ],
-          "name": "Pink Party",
+          "name": "Thailand Aviation Agencies",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "FlightAware - Live Flight Tracker",
+              "type": "url",
+              "url": "http://flightaware.com/live/"
+            },
+            {
+              "name": "Flightradar24.com",
+              "type": "url",
+              "url": "https://www.flightradar24.com/"
+            },
+            {
+              "name": "World Aeronautical Database",
+              "type": "url",
+              "url": "http://worldaerodata.com/"
+            },
+            {
+              "name": "ADS-B Exchange",
+              "type": "url",
+              "url": "https://www.adsbexchange.com/"
+            },
+            {
+              "name": "ADS-B.NL",
+              "type": "url",
+              "url": "https://www.ads-b.nl/index.php?pageno=9999"
+            }
+          ],
+          "name": "International Air Traffic Records",
           "type": "folder"
         }
       ],
-      "name": "Rail",
+      "name": "Air Transportation",
       "type": "folder"
     },
     {
@@ -127,26 +218,65 @@
         {
           "children": [
             {
-              "name": "List Data"
+              "name": "Marine Department Data",
+              "type": "url",
+              "url": "https://datagov.mot.go.th/organization/md",
+              "description": "Inland waterway freight, vessel registrations, port information"
             },
             {
-              "name": "Seo Jin Won"
+              "name": "Marine Department Portal",
+              "type": "url",
+              "url": "https://md.gdcatalog.go.th",
+              "description": "Waterborne transport data, ship names, cargo volume"
             },
             {
-              "name": "Some Bloke"
-            },
-            {
-              "name": "James Petersen"
-            },
-            {
-              "name": "Peter Schidmt"
+              "name": "Port Authority of Thailand",
+              "type": "url",
+              "url": "https://port.gdcatalog.go.th",
+              "description": "Port throughput, vessel statistics for major ports"
             }
           ],
-          "name": "Academias",
+          "name": "Thailand Maritime Agencies",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Marine Traffic",
+              "type": "url",
+              "url": "http://www.marinetraffic.com/"
+            },
+            {
+              "name": "Vessel Tracker",
+              "type": "url",
+              "url": "http://www.vesseltracker.com/app"
+            },
+            {
+              "name": "Ship AIS",
+              "type": "url",
+              "url": "http://www.shipais.com/"
+            },
+            {
+              "name": "Shodan Ship Tracker",
+              "type": "url",
+              "url": "https://shiptracker.shodan.io/"
+            },
+            {
+              "name": "OpenSeaMap - The free nautical chart",
+              "type": "url",
+              "url": "http://www.openseamap.org"
+            },
+            {
+              "name": "Vessel Finder",
+              "type": "url",
+              "url": "https://www.vesselfinder.com/"
+            }
+          ],
+          "name": "International Marine Records",
           "type": "folder"
         }
       ],
-      "name": "Air",
+      "name": "Water Transportation",
       "type": "folder"
     },
     {
@@ -154,20 +284,23 @@
         {
           "children": [
             {
-              "name": "Z"
+              "name": "Bangkok Mass Transit Authority (BMTA)",
+              "type": "url",
+              "url": "https://www.bmta.co.th",
+              "description": "Average daily ridership, fleet information"
             },
             {
-              "name": "Y"
-            },
-            {
-              "name": "X"
+              "name": "BTS Skytrain",
+              "type": "url",
+              "url": "https://www.bts.co.th/eng/index.html",
+              "description": "Ridership statistics, station/line information"
             }
           ],
-          "name": "Civil Society",
+          "name": "Thailand Urban Transit",
           "type": "folder"
         }
       ],
-      "name": "Water",
+      "name": "Urban Mass Transit",
       "type": "folder"
     },
     {
@@ -175,429 +308,328 @@
         {
           "children": [
             {
-              "children": [
-                {
-                  "name": "Red Bulls : NEG"
-                },
-                {
-                  "name": "Red Necks : POS"
-                },
-                {
-                  "name": "Red Guard : 0"
-                }
-              ],
-              "name": "Internal",
-              "type": "folder"
+              "name": "Open Government Data of Thailand",
+              "type": "url",
+              "url": "https://data.go.th",
+              "description": "National open data platform with transportation datasets"
+            },
+            {
+              "name": "MOT Data Catalog",
+              "type": "url",
+              "url": "https://datagov.mot.go.th",
+              "description": "Ministry of Transport's comprehensive data catalog"
+            },
+            {
+              "name": "Namtang - OTP Open Data",
+              "type": "url",
+              "url": "https://namtang.otp.go.th/opendata",
+              "description": "Office of Transport Policy data portal"
             }
           ],
-          "name": "Business Institutions",
+          "name": "Thailand National Portals",
           "type": "folder"
         },
         {
           "children": [
             {
-              "name": "Z"
+              "name": "Pollution Control Department",
+              "type": "url",
+              "url": "http://air4thai.pcd.go.th",
+              "description": "Air quality data, vehicle emission inspection"
             },
             {
-              "name": "Y"
-            },
-            {
-              "name": "X"
+              "name": "GISTDA Geospatial Portal",
+              "type": "url",
+              "url": "http://nsdiportal.gistda.or.th",
+              "description": "Geospatial data, potentially road network"
             }
           ],
-          "name": "Civil Society",
+          "name": "Thailand Environmental & GIS",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "iTIC Foundation",
+              "type": "url",
+              "url": "https://iticfoundation.org",
+              "description": "Traffic data from Thai Traffic Police, EXAT, BMA"
+            }
+          ],
+          "name": "Thailand NGO/Community Sources",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Satellite Tracking",
+              "type": "url",
+              "url": "http://www.n2yo.com/"
+            },
+            {
+              "name": "Track-Trace",
+              "type": "url",
+              "url": "http://www.track-trace.com/"
+            }
+          ],
+          "name": "International Tracking Services",
           "type": "folder"
         }
       ],
-      "name": "Other Relevant Data",
+      "name": "Cross-Modal & Support Data",
       "type": "folder"
     },
     {
       "children": [
-      {
-        "children": [
         {
-          "name": "Vehicle Purchase Records",
-          "type": "url",
-          "url": "http://vin.place/"
+          "children": [
+            {
+              "name": "SunCalc",
+              "type": "url",
+              "url": "http://suncalc.net/"
+            }
+          ],
+          "name": "Geolocation Tools",
+          "type": "folder"
         },
         {
-          "name": "VIN Decoderz",
-          "type": "url",
-          "url": "http://www.vindecoderz.com/"
+          "children": [
+            {
+              "name": "GPSVisualizer",
+              "type": "url",
+              "url": "http://www.gpsvisualizer.com/geocode"
+            },
+            {
+              "name": "Military Grid Reference System Coordinates",
+              "type": "url",
+              "url": "https://dominoc925-pages.appspot.com/mapplets/cs_mgrs.html"
+            },
+            {
+              "name": "Batch Geocoding",
+              "type": "url",
+              "url": "https://www.doogal.co.uk/BatchGeocoding.php"
+            },
+            {
+              "name": "Batch Reverse Geocoding",
+              "type": "url",
+              "url": "https://www.doogal.co.uk/BatchReverseGeocoding.php"
+            }
+          ],
+          "name": "Coordinates",
+          "type": "folder"
         },
         {
-          "name": "That's Them VIN Search",
-          "type": "url",
-          "url": "https://thatsthem.com/vin-search"
+          "children": [
+            {
+              "name": "BatchGeo",
+              "type": "url",
+              "url": "https://batchgeo.com/"
+            },
+            {
+              "name": "Hyperlapse (T)",
+              "type": "url",
+              "url": "https://github.com/TeehanLax/Hyperlapse.js"
+            },
+            {
+              "name": "Teehan+Lax Labs - Hyperlapse",
+              "type": "url",
+              "url": "http://labs.teehanlax.com/project/hyperlapse"
+            },
+            {
+              "name": "Google Maps Streetview Player",
+              "type": "url",
+              "url": "http://brianfolts.com/driver/"
+            },
+            {
+              "name": "ScribbleMaps",
+              "type": "url",
+              "url": "http://scribblemaps.com/"
+            }
+          ],
+          "name": "Map Reporting Tools",
+          "type": "folder"
         },
         {
-          "name": "Reverse Genie License Plates",
-          "type": "url",
-          "url": "http://www.reversegenie.com/plate.php"
+          "children": [
+            {
+              "name": "OpenSignal",
+              "type": "url",
+              "url": "https://opensignal.com/"
+            },
+            {
+              "name": "AntennaSearch",
+              "type": "url",
+              "url": "http://www.antennasearch.com/"
+            }
+          ],
+          "name": "Mobile Coverage",
+          "type": "folder"
         },
         {
-          "name": "VinCheck",
+          "name": "Google Maps",
           "type": "url",
-          "url": "https://www.nicb.org/theft_and_fraud_awareness/vincheck"
+          "url": "https://www.google.com/maps/"
         },
         {
-          "name": "TRAVIC - Public Transportation Tracking",
+          "name": "Bing Maps",
           "type": "url",
-          "url": "http://tracker.geops.ch/"
+          "url": "http://www.bing.com/maps/"
         },
         {
-          "name": "Vehicle Specifications Lookup",
+          "name": "HERE Maps",
           "type": "url",
-          "url": "https://berla.co/products/ive/vehicle-lookup/"
+          "url": "https://maps.here.com/"
         },
         {
-          "name": "License Plate Search",
+          "name": "Dual Maps",
           "type": "url",
-          "url": "https://www.vehiclehistory.com/licence-plate-search/licence-plate.php"
-        }],
-        "name": "Vehicle Records",
-        "type": "folder"
-      },
-      {
-        "children": [
-        {
-          "name": "FlightAware - Live Flight Tracker",
-          "type": "url",
-          "url": "http://flightaware.com/live/"
+          "url": "http://data.mashedworld.com/dualmaps/map.htm"
         },
         {
-          "name": "Flightradar24.com",
+          "name": "Instant Google Street View",
           "type": "url",
-          "url": "https://www.flightradar24.com/"
+          "url": "http://www.instantstreetview.com/"
         },
         {
-          "name": "World Aeronautical Database",
+          "name": "Wikimapia",
           "type": "url",
-          "url": "http://worldaerodata.com/"
+          "url": "http://wikimapia.org/#lang=en&lat=40.078071&lon=-100.458984&z=5&m=b"
         },
         {
-          "name": "ADS-B Exchange",
+          "name": "OpenStreetMap",
           "type": "url",
-          "url": "https://www.adsbexchange.com/"
+          "url": "http://www.openstreetmap.org/#map=5/40.614/-100.679"
         },
         {
-          "name": "ADS-B.NL",
+          "name": "Flash Earth",
           "type": "url",
-          "url": "https://www.ads-b.nl/index.php?pageno=9999"
-        }],
-        "name": "Air Traffic Records",
-        "type": "folder"
-      },
-      {
-        "children": [
-        {
-          "name": "Marine Traffic",
-          "type": "url",
-          "url": "http://www.marinetraffic.com/"
+          "url": "http://www.flashearth.com/"
         },
         {
-          "name": "Vessel Tracker",
+          "name": "Historic Aerials",
           "type": "url",
-          "url": "http://www.vesseltracker.com/app"
+          "url": "http://www.historicaerials.com/?javascript=&"
         },
         {
-          "name": "Ship AIS",
+          "name": "Google Maps Update Alerts",
           "type": "url",
-          "url": "http://www.shipais.com/"
+          "url": "https://followyourworld.appspot.com/"
         },
         {
-          "name": "Shodan Ship Tracker",
+          "name": "Google Earth Overlays",
           "type": "url",
-          "url": "https://shiptracker.shodan.io/"
+          "url": "http://www.mgmaps.com/kml/#view"
         },
         {
-          "name": "OpenSeaMap - The free nautical chart",
+          "name": "Yandex.Maps",
           "type": "url",
-          "url": "http://www.openseamap.org"
+          "url": "https://yandex.com/maps/"
         },
         {
-          "name": "Vessel Finder",
+          "name": "Google Earth",
           "type": "url",
-          "url": "https://www.vesselfinder.com/"
-        }],
-        "name": "Marine Records",
-        "type": "folder"
-      },
-      {
-        "children": [
+          "url": "https://www.google.com/earth/"
+        },
         {
-          "name": "Deutsche Bahn Open-Data-Portal (German)",
+          "name": "Baidu Maps",
           "type": "url",
-          "url": "http://data.deutschebahn.com/"
+          "url": "http://map.baidu.com/"
+        },
+        {
+          "name": "Corona",
+          "type": "url",
+          "url": "http://corona.cast.uark.edu/"
+        },
+        {
+          "name": "Daum (Korean)",
+          "type": "url",
+          "url": "http://map.daum.net/"
+        },
+        {
+          "name": "Naver (Korean)",
+          "type": "url",
+          "url": "http://map.naver.com/"
+        },
+        {
+          "name": "OpenStreetMap",
+          "type": "url",
+          "url": "http://www.openstreetmap.org/#map=5/51.500/-0.100"
+        },
+        {
+          "name": "EarthExplorer",
+          "type": "url",
+          "url": "https://earthexplorer.usgs.gov/"
+        },
+        {
+          "name": "OpenStreetCam",
+          "type": "url",
+          "url": "http://openstreetcam.org/"
+        },
+        {
+          "name": "Travel by Drone",
+          "type": "url",
+          "url": "http://travelbydrone.com/"
+        },
+        {
+          "name": "Hivemapper",
+          "type": "url",
+          "url": "https://hivemapper.com/"
+        },
+        {
+          "name": "LandsatLook Viewer",
+          "type": "url",
+          "url": "https://landsatlook.usgs.gov/"
+        },
+        {
+          "name": "Sentinel2Look Viewer",
+          "type": "url",
+          "url": "https://landsatlook.usgs.gov/sentinel2/"
+        },
+        {
+          "name": "NEXRAD Data Inventory Search",
+          "type": "url",
+          "url": "https://www.ncdc.noaa.gov/nexradinv/"
+        },
+        {
+          "name": "MapQuest",
+          "type": "url",
+          "url": "https://www.mapquest.com/"
         },
         {
           "name": "OpenRailwayMap",
           "type": "url",
-          "url": "https://www.openrailwaymap.org/"
-        }],
-        "name": "Railway Records",
-        "type": "folder"
-      },
-      {
-        "name": "Satellite Tracking",
-        "type": "url",
-        "url": "http://www.n2yo.com/"
-      },
-      {
-        "name": "Track-Trace",
-        "type": "url",
-        "url": "http://www.track-trace.com/"
-      }],
-      "name": "International Transportation Data",
-      "type": "folder"
-    },
-    {
-      "children": [
-      {
-        "children": [
-        {
-          "name": "SunCalc",
-          "type": "url",
-          "url": "http://suncalc.net/"
-        }],
-        "name": "Geolocation Tools",
-        "type": "folder"
-      },
-      {
-        "children": [
-        {
-          "name": "GPSVisualizer",
-          "type": "url",
-          "url": "http://www.gpsvisualizer.com/geocode"
+          "url": "http://www.openrailwaymap.org/"
         },
         {
-          "name": "Military Grid Reference System Coordinates",
+          "name": "OpenInfrastructureMap",
           "type": "url",
-          "url": "https://dominoc925-pages.appspot.com/mapplets/cs_mgrs.html"
+          "url": "openinframap.org/"
         },
         {
-          "name": "Batch Geocoding",
+          "name": "OpenStreetMap Routing Service",
           "type": "url",
-          "url": "https://www.doogal.co.uk/BatchGeocoding.php"
+          "url": "http://www.yournavigation.org/"
         },
         {
-          "name": "Batch Reverse Geocoding",
+          "name": "Hiking & Biking Map",
           "type": "url",
-          "url": "https://www.doogal.co.uk/BatchReverseGeocoding.php"
-        }],
-        "name": "Coordinates",
-        "type": "folder"
-      },
-      {
-        "children": [
-        {
-          "name": "BatchGeo",
-          "type": "url",
-          "url": "https://batchgeo.com/"
+          "url": "http://hikebikemap.org/"
         },
         {
-          "name": "Hyperlapse (T)",
+          "name": "US Nav Guide Zip Code Data",
           "type": "url",
-          "url": "https://github.com/TeehanLax/Hyperlapse.js"
+          "url": "http://www.usnaviguide.com/"
         },
         {
-          "name": "Teehan+Lax Labs - Hyperlapse",
+          "name": "Wayback Imagery",
           "type": "url",
-          "url": "http://labs.teehanlax.com/project/hyperlapse"
-        },
-        {
-          "name": "Google Maps Streetview Player",
-          "type": "url",
-          "url": "http://brianfolts.com/driver/"
-        },
-        {
-          "name": "ScribbleMaps",
-          "type": "url",
-          "url": "http://scribblemaps.com/"
-        }],
-        "name": "Map Reporting Tools",
-        "type": "folder"
-      },
-      {
-        "children": [
-        {
-          "name": "OpenSignal",
-          "type": "url",
-          "url": "https://opensignal.com/"
-        },
-        {
-          "name": "AntennaSearch",
-          "type": "url",
-          "url": "http://www.antennasearch.com/"
-        }],
-        "name": "Mobile Coverage",
-        "type": "folder"
-      },
-      {
-        "name": "Google Maps",
-        "type": "url",
-        "url": "https://www.google.com/maps/"
-      },
-      {
-        "name": "Bing Maps",
-        "type": "url",
-        "url": "http://www.bing.com/maps/"
-      },
-      {
-        "name": "HERE Maps",
-        "type": "url",
-        "url": "https://maps.here.com/"
-      },
-      {
-        "name": "Dual Maps",
-        "type": "url",
-        "url": "http://data.mashedworld.com/dualmaps/map.htm"
-      },
-      {
-        "name": "Instant Google Street View",
-        "type": "url",
-        "url": "http://www.instantstreetview.com/"
-      },
-      {
-        "name": "Wikimapia",
-        "type": "url",
-        "url": "http://wikimapia.org/#lang=en&lat=40.078071&lon=-100.458984&z=5&m=b"
-      },
-      {
-        "name": "OpenStreetMap",
-        "type": "url",
-        "url": "http://www.openstreetmap.org/#map=5/40.614/-100.679"
-      },
-      {
-        "name": "Flash Earth",
-        "type": "url",
-        "url": "http://www.flashearth.com/"
-      },
-      {
-        "name": "Historic Aerials",
-        "type": "url",
-        "url": "http://www.historicaerials.com/?javascript=&"
-      },
-      {
-        "name": "Google Maps Update Alerts",
-        "type": "url",
-        "url": "https://followyourworld.appspot.com/"
-      },
-      {
-        "name": "Google Earth Overlays",
-        "type": "url",
-        "url": "http://www.mgmaps.com/kml/#view"
-      },
-      {
-        "name": "Yandex.Maps",
-        "type": "url",
-        "url": "https://yandex.com/maps/"
-      },
-      {
-        "name": "Google Earth",
-        "type": "url",
-        "url": "https://www.google.com/earth/"
-      },
-      {
-        "name": "Baidu Maps",
-        "type": "url",
-        "url": "http://map.baidu.com/"
-      },
-      {
-        "name": "Corona",
-        "type": "url",
-        "url": "http://corona.cast.uark.edu/"
-      },
-      {
-        "name": "Daum (Korean)",
-        "type": "url",
-        "url": "http://map.daum.net/"
-      },
-      {
-        "name": "Naver (Korean)",
-        "type": "url",
-        "url": "http://map.naver.com/"
-      },
-      {
-        "name": "OpenStreetMap",
-        "type": "url",
-        "url": "http://www.openstreetmap.org/#map=5/51.500/-0.100"
-      },
-      {
-        "name": "EarthExplorer",
-        "type": "url",
-        "url": "https://earthexplorer.usgs.gov/"
-      },
-      {
-        "name": "OpenStreetCam",
-        "type": "url",
-        "url": "http://openstreetcam.org/"
-      },
-      {
-        "name": "Travel by Drone",
-        "type": "url",
-        "url": "http://travelbydrone.com/"
-      },
-      {
-        "name": "Hivemapper",
-        "type": "url",
-        "url": "https://hivemapper.com/"
-      },
-      {
-        "name": "LandsatLook Viewer",
-        "type": "url",
-        "url": "https://landsatlook.usgs.gov/"
-      },
-      {
-        "name": "Sentinel2Look Viewer",
-        "type": "url",
-        "url": "https://landsatlook.usgs.gov/sentinel2/"
-      },
-      {
-        "name": "NEXRAD Data Inventory Search",
-        "type": "url",
-        "url": "https://www.ncdc.noaa.gov/nexradinv/"
-      },
-      {
-        "name": "MapQuest",
-        "type": "url",
-        "url": "https://www.mapquest.com/"
-      },
-      {
-        "name": "OpenRailwayMap",
-        "type": "url",
-        "url": "http://www.openrailwaymap.org/"
-      },
-      {
-        "name": "OpenInfrastructureMap",
-        "type": "url",
-        "url": "openinframap.org/"
-      },
-      {
-        "name": "OpenStreetMap Routing Service",
-        "type": "url",
-        "url": "http://www.yournavigation.org/"
-      },
-      {
-        "name": "Hiking & Biking Map",
-        "type": "url",
-        "url": "http://hikebikemap.org/"
-      },
-      {
-        "name": "US Nav Guide Zip Code Data",
-        "type": "url",
-        "url": "http://www.usnaviguide.com/"
-      },
-      {
-        "name": "Wayback Imagery",
-        "type": "url",
-        "url": "https://livingatlas.arcgis.com/wayback/"
-      }],
+          "url": "https://livingatlas.arcgis.com/wayback/"
+        }
+      ],
       "name": "Geolocation Tools / Maps",
       "type": "folder"
     }
   ],
-  "name": "Transport Open Data",
+  "name": "Transportation Open Data Map",
   "type": "folder"
 }
