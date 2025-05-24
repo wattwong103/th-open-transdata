@@ -5,31 +5,31 @@
         {
           "children": [
             {
-              "name": "Department of Land Transport Data Catalog",
+              "name": "Department of Land Transport Data Catalog (G)",
               "type": "url",
               "url": "https://gdcatalog.dlt.go.th",
               "description": "Vehicle registration, driver licenses, transport operator licenses"
             },
             {
-              "name": "Road Domestic Transport Volume",
+              "name": "Road Domestic Transport Volume (G)",
               "type": "url",
               "url": "https://uat.data.go.th/en/dataset/road-domestic-transport-volume",
               "description": "Road freight transport volumes within Thailand"
             },
             {
-              "name": "Department of Highways (DOH)",
+              "name": "Department of Highways (DOH) (G)(NA)",
               "type": "url",
               "url": "https://data.doh.go.th",
               "description": "Highway statistics, M-Flow usage, accident cost studies"
             },
             {
-              "name": "Department of Rural Roads (DRR)",
+              "name": "Department of Rural Roads (DRR) (G)(NA)",
               "type": "url",
               "url": "http://dataportal.drr.go.th",
               "description": "Rural road network data, project information"
             },
             {
-              "name": "Expressway Authority of Thailand (EXAT)",
+              "name": "Expressway Authority of Thailand (EXAT) (G)(NA)",
               "type": "url",
               "url": "https://catalog.exat.co.th",
               "description": "Traffic data, annual reports, interesting statistics"
@@ -41,42 +41,42 @@
         {
           "children": [
             {
-              "name": "Vehicle Purchase Records",
+              "name": "Vehicle Purchase Records (C)",
               "type": "url",
               "url": "http://vin.place/"
             },
             {
-              "name": "VIN Decoderz",
+              "name": "VIN Decoderz (C)",
               "type": "url",
               "url": "http://www.vindecoderz.com/"
             },
             {
-              "name": "That's Them VIN Search",
+              "name": "That's Them VIN Search (C)",
               "type": "url",
               "url": "https://thatsthem.com/vin-search"
             },
             {
-              "name": "Reverse Genie License Plates",
+              "name": "Reverse Genie License Plates (C)",
               "type": "url",
               "url": "http://www.reversegenie.com/plate.php"
             },
             {
-              "name": "VinCheck",
+              "name": "VinCheck (G)",
               "type": "url",
               "url": "https://www.nicb.org/theft_and_fraud_awareness/vincheck"
             },
             {
-              "name": "TRAVIC - Public Transportation Tracking",
+              "name": "TRAVIC - Public Transportation Tracking (O)",
               "type": "url",
               "url": "http://tracker.geops.ch/"
             },
             {
-              "name": "Vehicle Specifications Lookup",
+              "name": "Vehicle Specifications Lookup (C)",
               "type": "url",
               "url": "https://berla.co/products/ive/vehicle-lookup/"
             },
             {
-              "name": "License Plate Search",
+              "name": "License Plate Search (C)",
               "type": "url",
               "url": "https://www.vehiclehistory.com/licence-plate-search/licence-plate.php"
             }
@@ -93,25 +93,25 @@
         {
           "children": [
             {
-              "name": "State Railway of Thailand Data Catalog",
+              "name": "State Railway of Thailand Data Catalog (G)",
               "type": "url",
               "url": "https://gdc.railway.co.th",
               "description": "Passenger stations, railway-related information"
             },
             {
-              "name": "Rail Technology Database",
+              "name": "Rail Technology Database (G)",
               "type": "url",
               "url": "https://www.rtrda.or.th/en/ผลงานและโครงการเด่น/ฐานข้อมูล-เทคโนโลยี-ระบบ/",
               "description": "Research, innovations, agencies, experts, rail technology"
             },
             {
-              "name": "Rail Freight Statistics",
+              "name": "Rail Freight Statistics (G)",
               "type": "url",
               "url": "https://gdcatalog.go.th/dataset/gdpublish-stat_freight_rail",
               "description": "Monthly rail freight transport volume statistics"
             },
             {
-              "name": "Department of Rail Transport (DRT)",
+              "name": "Department of Rail Transport (DRT) (G)",
               "type": "url",
               "url": "https://drt.gdcatalog.go.th",
               "description": "Rail system KPIs, electric train data"
@@ -123,12 +123,12 @@
         {
           "children": [
             {
-              "name": "Deutsche Bahn Open-Data-Portal (German)",
+              "name": "Deutsche Bahn Open-Data-Portal (German) (G)(O)",
               "type": "url",
               "url": "http://data.deutschebahn.com/"
             },
             {
-              "name": "OpenRailwayMap",
+              "name": "OpenRailwayMap (O)",
               "type": "url",
               "url": "https://www.openrailwaymap.org/"
             }
@@ -145,31 +145,31 @@
         {
           "children": [
             {
-              "name": "Civil Aviation Authority of Thailand",
+              "name": "Civil Aviation Authority of Thailand (G)",
               "type": "url",
               "url": "https://datagov.mot.go.th/en/dataset/?organization=caat",
               "description": "Flight counts, passenger numbers, aircraft registrations"
             },
             {
-              "name": "Airports of Thailand Dataset",
+              "name": "Airports of Thailand Dataset (O)",
               "type": "url",
               "url": "https://data.opendevelopmentmekong.net/en/dataset/airports-of-thailand",
               "description": "Airport location data, ICAO and IATA codes"
             },
             {
-              "name": "Air Transport Volume Data",
+              "name": "Air Transport Volume Data (G)",
               "type": "url",
               "url": "https://uat.data.go.th/en/dataset/air-freight-pass",
               "description": "Flight numbers, passenger counts, freight volumes"
             },
             {
-              "name": "Airports of Thailand (AOT)",
+              "name": "Airports of Thailand (AOT) (G)",
               "type": "url",
               "url": "https://www.airportthai.co.th",
               "description": "Annual airport statistics, passenger and cargo data"
             },
             {
-              "name": "Department of Airports (DOA)",
+              "name": "Department of Airports (DOA) (G)(NA)",
               "type": "url",
               "url": "http://gdcatalog.airports.go.th",
               "description": "Flight and passenger statistics for regional airports"
@@ -181,27 +181,27 @@
         {
           "children": [
             {
-              "name": "FlightAware - Live Flight Tracker",
+              "name": "FlightAware - Live Flight Tracker (C)(R)",
               "type": "url",
               "url": "http://flightaware.com/live/"
             },
             {
-              "name": "Flightradar24.com",
+              "name": "Flightradar24.com (C)(R)",
               "type": "url",
               "url": "https://www.flightradar24.com/"
             },
             {
-              "name": "World Aeronautical Database",
+              "name": "World Aeronautical Database (O)",
               "type": "url",
               "url": "http://worldaerodata.com/"
             },
             {
-              "name": "ADS-B Exchange",
+              "name": "ADS-B Exchange (O)",
               "type": "url",
               "url": "https://www.adsbexchange.com/"
             },
             {
-              "name": "ADS-B.NL",
+              "name": "ADS-B.NL (O)",
               "type": "url",
               "url": "https://www.ads-b.nl/index.php?pageno=9999"
             }
@@ -308,19 +308,19 @@
         {
           "children": [
             {
-              "name": "Open Government Data of Thailand",
+              "name": "Open Government Data of Thailand (G)(O)",
               "type": "url",
               "url": "https://data.go.th",
               "description": "National open data platform with transportation datasets"
             },
             {
-              "name": "MOT Data Catalog",
+              "name": "MOT Data Catalog (G)(O)",
               "type": "url",
               "url": "https://datagov.mot.go.th",
               "description": "Ministry of Transport's comprehensive data catalog"
             },
             {
-              "name": "Namtang - OTP Open Data",
+              "name": "Namtang - OTP Open Data (G)(O)",
               "type": "url",
               "url": "https://namtang.otp.go.th/opendata",
               "description": "Office of Transport Policy data portal"
@@ -466,37 +466,37 @@
           "type": "folder"
         },
         {
-          "name": "Google Maps",
+          "name": "Google Maps (C)",
           "type": "url",
           "url": "https://www.google.com/maps/"
         },
         {
-          "name": "Bing Maps",
+          "name": "Bing Maps (C)",
           "type": "url",
           "url": "http://www.bing.com/maps/"
         },
         {
-          "name": "HERE Maps",
+          "name": "HERE Maps (C)",
           "type": "url",
           "url": "https://maps.here.com/"
         },
         {
-          "name": "Dual Maps",
+          "name": "Dual Maps (O)",
           "type": "url",
           "url": "http://data.mashedworld.com/dualmaps/map.htm"
         },
         {
-          "name": "Instant Google Street View",
+          "name": "Instant Google Street View (O)",
           "type": "url",
           "url": "http://www.instantstreetview.com/"
         },
         {
-          "name": "Wikimapia",
+          "name": "Wikimapia (O)",
           "type": "url",
           "url": "http://wikimapia.org/#lang=en&lat=40.078071&lon=-100.458984&z=5&m=b"
         },
         {
-          "name": "OpenStreetMap",
+          "name": "OpenStreetMap (O)",
           "type": "url",
           "url": "http://www.openstreetmap.org/#map=5/40.614/-100.679"
         },
