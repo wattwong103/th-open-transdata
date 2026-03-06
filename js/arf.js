@@ -1,6 +1,6 @@
 var margin = [20, 120, 20, 140],
     width = 1280 - margin[1] - margin[3],
-    height = 800 - margin[0] - margin[2],
+    height = 1200 - margin[0] - margin[2],
     i = 0,
     duration = 1250,
     root;
@@ -11,10 +11,54 @@ var tree = d3.layout.tree()
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 
-var vis = d3.select("#body").append("svg:svg")
+// Color function based on depth
+function nodeColor(d) {
+  if (d.depth === 0) return "#4338ca"; // deep indigo for root
+  if (d.depth === 1) return "#0d9488"; // teal for categories
+  if (d.depth === 2) return "#ea580c"; // coral/orange for sub-categories
+  return "#059669"; // emerald for leaves
+}
+
+function nodeStroke(d) {
+  if (d.depth === 0) return "#6366f1";
+  if (d.depth === 1) return "#14b8a6";
+  if (d.depth === 2) return "#f97316";
+  return "#10b981";
+}
+
+// Create SVG with zoom behavior
+var zoom = d3.behavior.zoom()
+    .scaleExtent([0.3, 3])
+    .on("zoom", function() {
+      vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    });
+
+var svg = d3.select("#body").append("svg:svg")
     .attr("width", width + margin[1] + margin[3])
     .attr("height", height + margin[0] + margin[2])
-  .append("svg:g")
+    .call(zoom);
+
+// Add drop shadow filter
+var defs = svg.append("defs");
+var filter = defs.append("filter")
+    .attr("id", "drop-shadow")
+    .attr("height", "130%");
+
+filter.append("feGaussianBlur")
+    .attr("in", "SourceAlpha")
+    .attr("stdDeviation", 3);
+
+filter.append("feOffset")
+    .attr("dx", 0)
+    .attr("dy", 2)
+    .attr("result", "offsetblur");
+
+var feMerge = filter.append("feMerge");
+feMerge.append("feMergeNode");
+feMerge.append("feMergeNode")
+    .attr("in", "SourceGraphic");
+
+var vis = svg.append("svg:g")
     .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
 d3.json("arf.json", function(json) {
@@ -30,19 +74,11 @@ d3.json("arf.json", function(json) {
     }
   }
 
-/*  function toggleAll(d) {
-    if (d.children) {
-      d.children.forEach(toggleAll);
-      toggle(d);
-    }
-  } */
   root.children.forEach(collapse);
   update(root);
 });
 
 function update(source) {
-  // var duration = d3.event && d3.event.altKey ? 5000 : 500;
-
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse();
 
@@ -57,11 +93,32 @@ function update(source) {
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { toggle(d); update(d); });
+      .on("click", function(d) {
+        d3.event.stopPropagation();
+        toggle(d);
+        update(d);
+      })
+      .on("mouseover", function(d) {
+        d3.select(this).select("circle")
+          .transition()
+          .duration(200)
+          .attr("r", 12);
+      })
+      .on("mouseout", function(d) {
+        d3.select(this).select("circle")
+          .transition()
+          .duration(200)
+          .attr("r", 8);
+      });
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+      .style("fill", function(d) {
+        return d._children ? nodeColor(d) : nodeColor(d);
+      })
+      .style("stroke", function(d) { return nodeStroke(d); })
+      .style("stroke-width", "2px")
+      .style("filter", "url(#drop-shadow)");
 
   nodeEnter.append('a')
       .attr("target", "_blank")
@@ -71,7 +128,9 @@ function update(source) {
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
       .text(function(d) { return d.name; })
-      .style("fill: rgb(0, 0, 0)", function(d) { return d.free ? 'black' : '#999'; })
+      .style("fill", "#e2e8f0")
+      .style("font-size", "13px")
+      .style("font-weight", "500")
       .style("fill-opacity", 1e-6);
 
   nodeEnter.append("svg:title")
@@ -85,8 +144,20 @@ function update(source) {
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
   nodeUpdate.select("circle")
-      .attr("r", 6)
-      .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+      .attr("r", 8)
+      .style("fill", function(d) {
+        if (d._children) {
+          // Has collapsed children - darker shade
+          var baseColor = nodeColor(d);
+          return baseColor;
+        } else {
+          // Expanded or leaf - lighter shade
+          if (d.depth === 0) return "#6366f1";
+          if (d.depth === 1) return "#14b8a6";
+          if (d.depth === 2) return "#fb923c";
+          return "#34d399";
+        }
+      });
 
   nodeUpdate.select("text")
       .style("fill-opacity", 1);
