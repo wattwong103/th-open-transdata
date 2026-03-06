@@ -1,4 +1,4 @@
-var margin = [20, 120, 20, 140],
+var margin = [20, 60, 20, 60],
     width = window.innerWidth - margin[1] - margin[3],
     height = window.innerHeight * 0.9 - margin[0] - margin[2],
     i = 0,
@@ -74,7 +74,27 @@ d3.json("arf.json", function(json) {
     }
   }
 
-  root.children.forEach(collapse);
+  // Collapse from level 2 onwards (keep root and first level expanded)
+  function collapseFromLevel(d, currentDepth, targetDepth) {
+    if (d.children) {
+      if (currentDepth >= targetDepth) {
+        d._children = d.children;
+        d._children.forEach(function(child) {
+          collapseFromLevel(child, currentDepth + 1, targetDepth);
+        });
+        d.children = null;
+      } else {
+        d.children.forEach(function(child) {
+          collapseFromLevel(child, currentDepth + 1, targetDepth);
+        });
+      }
+    }
+  }
+
+  // Start with first level expanded (collapse from depth 2 onwards)
+  root.children.forEach(function(d) {
+    collapseFromLevel(d, 1, 2);
+  });
   update(root);
 });
 
@@ -91,7 +111,9 @@ function update(source) {
 
   // Enter any new nodes at the parent's previous position.
   var nodeEnter = node.enter().append("svg:g")
-      .attr("class", "node")
+      .attr("class", function(d) {
+        return d.children || d._children ? "node folder" : "node leaf";
+      })
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
       .on("mouseover", function(d) {
         d3.select(this).select("circle")
@@ -146,15 +168,7 @@ function update(source) {
       .style("font-size", "13px")
       .style("font-weight", "500")
       .style("fill-opacity", 1e-6)
-      .style("cursor", function(d) { return d.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); })
-      .on("click", function(d) {
-        // Only toggle for folder nodes (nodes without URLs)
-        if (!d.url && (d.children || d._children)) {
-          d3.event.stopPropagation();
-          toggle(d);
-          update(d);
-        }
-      });
+      .style("cursor", function(d) { return d.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); });
 
   nodeEnter.append("svg:title")
     .text(function(d) {
