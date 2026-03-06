@@ -33,6 +33,24 @@
               "type": "url",
               "url": "https://catalog.exat.co.th",
               "description": "Traffic data, annual reports, interesting statistics"
+            },
+            {
+              "name": "Bangkok Traffic Management (G)",
+              "type": "url",
+              "url": "https://traffic.bangkok.go.th",
+              "description": "Real-time traffic conditions and camera feeds in Bangkok"
+            },
+            {
+              "name": "Thailand Traffic Data Portal (G)(O)",
+              "type": "url",
+              "url": "https://data.go.th/dataset?tags=traffic",
+              "description": "Open traffic data from various government agencies"
+            },
+            {
+              "name": "Thai Road Safety Data (G)",
+              "type": "url",
+              "url": "https://data.go.th/dataset?tags=road+safety",
+              "description": "Road accident statistics and road safety information"
             }
           ],
           "name": "Thailand Government Agencies",
@@ -218,19 +236,19 @@
         {
           "children": [
             {
-              "name": "Marine Department Data",
+              "name": "Marine Department Data (G)",
               "type": "url",
               "url": "https://datagov.mot.go.th/organization/md",
               "description": "Inland waterway freight, vessel registrations, port information"
             },
             {
-              "name": "Marine Department Portal",
+              "name": "Marine Department Portal (G)",
               "type": "url",
               "url": "https://md.gdcatalog.go.th",
               "description": "Waterborne transport data, ship names, cargo volume"
             },
             {
-              "name": "Port Authority of Thailand",
+              "name": "Port Authority of Thailand (G)",
               "type": "url",
               "url": "https://port.gdcatalog.go.th",
               "description": "Port throughput, vessel statistics for major ports"
@@ -284,16 +302,40 @@
         {
           "children": [
             {
-              "name": "Bangkok Mass Transit Authority (BMTA)",
+              "name": "Bangkok Mass Transit Authority (BMTA) (G)",
               "type": "url",
               "url": "https://www.bmta.co.th",
-              "description": "Average daily ridership, fleet information"
+              "description": "Average daily ridership, fleet information, bus routes"
             },
             {
-              "name": "BTS Skytrain",
+              "name": "BTS Skytrain (C)",
               "type": "url",
               "url": "https://www.bts.co.th/eng/index.html",
               "description": "Ridership statistics, station/line information"
+            },
+            {
+              "name": "MRT Bangkok Metro (C)",
+              "type": "url",
+              "url": "https://www.bangkokmetro.co.th",
+              "description": "MRT Blue and Purple line ridership data, station information"
+            },
+            {
+              "name": "Airport Rail Link (C)",
+              "type": "url",
+              "url": "https://www.srtet.co.th",
+              "description": "Airport Rail Link ridership statistics, station data"
+            },
+            {
+              "name": "Bangkok Transit Open Data (G)(O)",
+              "type": "url",
+              "url": "https://data.go.th/dataset?tags=Bangkok+Mass+Transit",
+              "description": "Consolidated Bangkok public transit datasets"
+            },
+            {
+              "name": "Electric Train Data Portal (G)",
+              "type": "url",
+              "url": "https://drt.gdcatalog.go.th",
+              "description": "Electric rail system performance and passenger data"
             }
           ],
           "name": "Thailand Urban Transit",
@@ -301,6 +343,48 @@
         }
       ],
       "name": "Urban Mass Transit",
+      "type": "folder"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "name": "EV Charging Stations Thailand (O)",
+              "type": "url",
+              "url": "https://www.plugshare.com/",
+              "description": "Map of electric vehicle charging stations across Thailand"
+            },
+            {
+              "name": "Provincial Electricity Authority EV Data (G)",
+              "type": "url",
+              "url": "https://www.pea.co.th/ev",
+              "description": "PEA electric vehicle charging infrastructure"
+            },
+            {
+              "name": "Thailand EV Database (O)",
+              "type": "url",
+              "url": "https://www.evat.or.th",
+              "description": "Electric Vehicle Association of Thailand data"
+            },
+            {
+              "name": "Bangkok Traffic Info - Traffy Fondue (O)",
+              "type": "url",
+              "url": "https://traffy.in.th",
+              "description": "Crowdsourced traffic and infrastructure issues"
+            },
+            {
+              "name": "Smart Mobility Data Portal (G)",
+              "type": "url",
+              "url": "https://namtang.otp.go.th",
+              "description": "Integrated transport planning and smart mobility data"
+            }
+          ],
+          "name": "Thailand Emerging Mobility",
+          "type": "folder"
+        }
+      ],
+      "name": "Smart Mobility & Electric Vehicles",
       "type": "folder"
     },
     {
