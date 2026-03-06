@@ -79,7 +79,16 @@ hr {
   font-size: 13px;
   fill: #e2e8f0;
   font-weight: 500;
+}
+
+/* Disable pointer events for folder node text (click on circles instead) */
+.node.folder text {
   pointer-events: none;
+}
+
+/* Enable pointer events for leaf node text (to make links clickable) */
+.node.leaf text {
+  pointer-events: auto;
 }
 
 path.link {
