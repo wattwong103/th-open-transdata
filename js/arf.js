@@ -1,6 +1,6 @@
 var margin = [20, 120, 20, 140],
-    width = 1280 - margin[1] - margin[3],
-    height = 1200 - margin[0] - margin[2],
+    width = window.innerWidth - margin[1] - margin[3],
+    height = window.innerHeight * 0.9 - margin[0] - margin[2],
     i = 0,
     duration = 1250,
     root;
@@ -93,11 +93,6 @@ function update(source) {
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) {
-        d3.event.stopPropagation();
-        toggle(d);
-        update(d);
-      })
       .on("mouseover", function(d) {
         d3.select(this).select("circle")
           .transition()
@@ -118,12 +113,31 @@ function update(source) {
       })
       .style("stroke", function(d) { return nodeStroke(d); })
       .style("stroke-width", "2px")
-      .style("filter", "url(#drop-shadow)");
+      .style("filter", "url(#drop-shadow)")
+      .on("click", function(d) {
+        // Only toggle if it's a folder node (has children or _children)
+        if (d.children || d._children) {
+          d3.event.stopPropagation();
+          toggle(d);
+          update(d);
+        }
+      });
 
-  nodeEnter.append('a')
-      .attr("target", "_blank")
-      .attr('xlink:href', function(d) { return d.url; })
-      .append("svg:text")
+  // Add text - wrapped in <a> if it has a URL, otherwise plain text
+  var textElement = nodeEnter.append(function(d) {
+    if (d.url) {
+      // Create an <a> element for nodes with URLs
+      var a = document.createElementNS("http://www.w3.org/2000/svg", "a");
+      a.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", d.url);
+      a.setAttribute("target", "_blank");
+      return a;
+    } else {
+      // Create a <g> element for folder nodes
+      return document.createElementNS("http://www.w3.org/2000/svg", "g");
+    }
+  });
+
+  textElement.append("svg:text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
@@ -131,7 +145,16 @@ function update(source) {
       .style("fill", "#e2e8f0")
       .style("font-size", "13px")
       .style("font-weight", "500")
-      .style("fill-opacity", 1e-6);
+      .style("fill-opacity", 1e-6)
+      .style("cursor", function(d) { return d.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); })
+      .on("click", function(d) {
+        // Only toggle for folder nodes (nodes without URLs)
+        if (!d.url && (d.children || d._children)) {
+          d3.event.stopPropagation();
+          toggle(d);
+          update(d);
+        }
+      });
 
   nodeEnter.append("svg:title")
     .text(function(d) {

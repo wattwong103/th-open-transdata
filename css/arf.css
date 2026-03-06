@@ -11,6 +11,13 @@ body {
 #body {
   margin: 0 auto;
   position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+#body svg {
+  display: block;
+  margin: 0 auto;
 }
 
 #header {
