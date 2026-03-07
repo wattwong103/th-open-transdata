@@ -240,21 +240,8 @@ function update(source) {
         }
       });
 
-  // Add text - wrapped in <a> if it has a URL, otherwise plain text
-  var textElement = nodeEnter.append(function(d) {
-    if (d.url) {
-      // Create an <a> element for nodes with URLs
-      var a = document.createElementNS("http://www.w3.org/2000/svg", "a");
-      a.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", d.url);
-      a.setAttribute("target", "_blank");
-      return a;
-    } else {
-      // Create a <g> element for folder nodes
-      return document.createElementNS("http://www.w3.org/2000/svg", "g");
-    }
-  });
-
-  textElement.append("svg:text")
+  // Add text labels to nodes
+  nodeEnter.append("svg:text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
