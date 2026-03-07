@@ -218,8 +218,8 @@ function update(source) {
           .attr("r", 8);
       });
 
-  console.log("NodeEnter size:", nodeEnter.size());
-  addDebugMessage('✓ Created ' + nodeEnter.size() + ' new nodes');
+  console.log("NodeEnter selection:", nodeEnter[0].length, "new nodes to create");
+  addDebugMessage('✓ Creating ' + nodeEnter[0].length + ' new nodes');
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
