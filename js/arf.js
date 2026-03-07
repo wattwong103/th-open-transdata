@@ -61,7 +61,12 @@ feMerge.append("feMergeNode")
 var vis = svg.append("svg:g")
     .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
-d3.json("arf.json", function(json) {
+d3.json("arf.json", function(error, json) {
+  if (error) {
+    console.error("Error loading arf.json:", error);
+    return;
+  }
+
   root = json;
   root.x0 = height / 2;
   root.y0 = 0;
@@ -91,10 +96,28 @@ d3.json("arf.json", function(json) {
     }
   }
 
-  // Start with first level expanded (collapse from depth 2 onwards)
-  root.children.forEach(function(d) {
-    collapseFromLevel(d, 1, 2);
+  // Collapse all children recursively except the first level
+  function collapseDeep(d) {
+    if (d.children) {
+      d.children.forEach(collapseDeep);
+      if (d.depth && d.depth >= 1) {
+        d._children = d.children;
+        d.children = null;
+      }
+    }
+  }
+
+  // First, let D3 calculate depths by calling update which calls tree.nodes(root)
+  // Then collapse based on calculated depths
+  // For now, keep first level expanded (collapse depth >= 2)
+  root.children.forEach(function(child) {
+    if (child.children) {
+      child.children.forEach(function(grandchild) {
+        collapse(grandchild);
+      });
+    }
   });
+
   update(root);
 });
 
