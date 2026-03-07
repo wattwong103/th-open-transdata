@@ -59,6 +59,30 @@
         {
           "children": [
             {
+              "name": "Bangkok Open Data Portal (G)(O)",
+              "type": "url",
+              "url": "https://data.bangkok.go.th/en/",
+              "description": "BTS routes, BRT routes, MRT stations, bicycle routes, city services"
+            },
+            {
+              "name": "Bangkok Traffic Management Center (G)",
+              "type": "url",
+              "url": "https://traffic.bangkok.go.th",
+              "description": "Real-time traffic monitoring, CCTV feeds, incident reports"
+            },
+            {
+              "name": "Traffy Fondue Bangkok (O)",
+              "type": "url",
+              "url": "https://traffy.in.th",
+              "description": "Crowdsourced infrastructure issues, traffic problems, citizen reports"
+            }
+          ],
+          "name": "Bangkok Metropolitan Data",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
               "name": "Vehicle Purchase Records (C)",
               "type": "url",
               "url": "http://vin.place/"
@@ -378,6 +402,24 @@
               "type": "url",
               "url": "https://namtang.otp.go.th",
               "description": "Integrated transport planning and smart mobility data"
+            },
+            {
+              "name": "Grab Thailand (C)",
+              "type": "url",
+              "url": "https://www.grab.com/th/en/",
+              "description": "Ride-hailing, food delivery, mobility data (Southeast Asia)"
+            },
+            {
+              "name": "Bolt Thailand (C)",
+              "type": "url",
+              "url": "https://bolt.eu/en/cities/bangkok/",
+              "description": "Ride-hailing service operating in Bangkok"
+            },
+            {
+              "name": "LINE MAN (C)",
+              "type": "url",
+              "url": "https://lineman.line.me",
+              "description": "Food delivery and logistics, owned by LINE Thailand"
             }
           ],
           "name": "Thailand Emerging Mobility",
@@ -385,6 +427,48 @@
         }
       ],
       "name": "Smart Mobility & Electric Vehicles",
+      "type": "folder"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "name": "Thailand Post Tracking (G)",
+              "type": "url",
+              "url": "https://www.thailandpost.com",
+              "description": "National postal service, parcel tracking, delivery statistics"
+            },
+            {
+              "name": "Kerry Express Thailand (C)",
+              "type": "url",
+              "url": "https://th.kerryexpress.com",
+              "description": "Express delivery service, tracking API available"
+            },
+            {
+              "name": "Flash Express Thailand (C)",
+              "type": "url",
+              "url": "https://www.flashexpress.co.th",
+              "description": "E-commerce logistics, parcel tracking, delivery network"
+            },
+            {
+              "name": "J&T Express Thailand (C)",
+              "type": "url",
+              "url": "https://www.jtexpress.co.th",
+              "description": "International express delivery service in Thailand"
+            },
+            {
+              "name": "ETrackings API - Thailand Couriers (O)",
+              "type": "url",
+              "url": "https://etrackings.com/en/docs/couriers",
+              "description": "Unified API for Flash, Kerry, J&T, Thailand Post, DHL, 50+ couriers"
+            }
+          ],
+          "name": "Thailand Logistics & Delivery",
+          "type": "folder"
+        }
+      ],
+      "name": "Logistics & Express Delivery",
       "type": "folder"
     },
     {
@@ -416,6 +500,66 @@
         {
           "children": [
             {
+              "name": "National Statistical Office (NSO) (G)(O)",
+              "type": "url",
+              "url": "https://www.nso.go.th/nsoweb/index?set_lang=en",
+              "description": "Transport & logistics statistics, Statistical Yearbook, official surveys"
+            },
+            {
+              "name": "NSO Interactive Dashboard (G)",
+              "type": "url",
+              "url": "https://ittdashboard.nso.go.th/index_en.php",
+              "description": "Interactive visualization of Thailand's statistical data"
+            },
+            {
+              "name": "Bank of Thailand Statistics (G)(O)",
+              "type": "url",
+              "url": "https://www.bot.or.th/en/statistics.html",
+              "description": "Economic indicators, logistics performance index, freight costs"
+            },
+            {
+              "name": "Ministry of Commerce Trade Data (G)(O)",
+              "type": "url",
+              "url": "https://tradereport.moc.go.th/en",
+              "description": "Import/export statistics, trade volumes, vehicle trade data"
+            },
+            {
+              "name": "Thai Customs Statistics (G)",
+              "type": "url",
+              "url": "https://www.customs.go.th/statistic_report.php?ini_content=statistics_report&lang=en",
+              "description": "Vehicle imports/exports, Chapter 87 automotive trade data"
+            }
+          ],
+          "name": "Thailand National Statistics",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Tourism Authority of Thailand (TAT) (G)(O)",
+              "type": "url",
+              "url": "https://www.tat.or.th/en",
+              "description": "Tourism data API, attractions, hotels, restaurants, travel routes"
+            },
+            {
+              "name": "TAT Intelligence Center (TATIC) (G)",
+              "type": "url",
+              "url": "https://corp.tourismthailand.org/en",
+              "description": "Tourist arrivals, domestic tourism, surveys, situation analysis"
+            },
+            {
+              "name": "TAT Open Data Platform (G)(O)",
+              "type": "url",
+              "url": "https://www.tourismthailand.org",
+              "description": "APIs for tourist attractions, landmarks, festivals, coordinates"
+            }
+          ],
+          "name": "Thailand Tourism Statistics",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
               "name": "Pollution Control Department",
               "type": "url",
               "url": "http://air4thai.pcd.go.th",
@@ -441,6 +585,30 @@
             }
           ],
           "name": "Thailand NGO/Community Sources",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Chulalongkorn Transportation Institute (TRI)",
+              "type": "url",
+              "url": "http://www.cuti.chula.ac.th/en/",
+              "description": "Transportation and logistics research, Southeast Asia resource center"
+            },
+            {
+              "name": "KMUTT Research Portal",
+              "type": "url",
+              "url": "https://kirim.kmutt.ac.th",
+              "description": "King Mongkut's University transport engineering research"
+            },
+            {
+              "name": "Asian Institute of Technology (AIT)",
+              "type": "url",
+              "url": "https://ait.ac.th",
+              "description": "Transportation engineering, infrastructure research"
+            }
+          ],
+          "name": "Thailand Academic Research",
           "type": "folder"
         },
         {
