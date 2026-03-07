@@ -205,13 +205,13 @@ function update(source) {
         return d.children || d._children ? "node folder" : "node leaf";
       })
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("mouseover", function(d) {
+      .on("mouseover", function(event, d) {
         d3.select(this).select("circle")
           .transition()
           .duration(200)
           .attr("r", 12);
       })
-      .on("mouseout", function(d) {
+      .on("mouseout", function(event, d) {
         d3.select(this).select("circle")
           .transition()
           .duration(200)
@@ -258,7 +258,8 @@ function update(source) {
     });
 
   // Transition nodes to their new position.
-  var nodeUpdate = node.transition()
+  // D3 v7: Merge enter and update selections before transitioning
+  var nodeUpdate = nodeEnter.merge(node).transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
