@@ -201,7 +201,6 @@ function update(source) {
   // Enter any new nodes at the parent's previous position.
   console.log("Creating new nodes...");
   var nodeEnter = node.enter().append("svg:g")
-  console.log("NodeEnter size:", nodeEnter.size());
       .attr("class", function(d) {
         return d.children || d._children ? "node folder" : "node leaf";
       })
@@ -218,6 +217,9 @@ function update(source) {
           .duration(200)
           .attr("r", 8);
       });
+
+  console.log("NodeEnter size:", nodeEnter.size());
+  addDebugMessage('✓ Created ' + nodeEnter.size() + ' new nodes');
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
