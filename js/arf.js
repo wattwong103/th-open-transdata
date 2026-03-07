@@ -232,9 +232,14 @@ function update(source) {
       .style("stroke-width", "2px")
       .style("filter", "url(#drop-shadow)")
       .on("click", function(event, d) {
-        // Only toggle if it's a folder node (has children or _children)
-        if (d.children || d._children) {
-          event.stopPropagation();
+        event.stopPropagation();
+
+        // If node has a URL, open it in new tab
+        if (d.data.url) {
+          window.open(d.data.url, '_blank');
+        }
+        // Otherwise, if it's a folder node, toggle it
+        else if (d.children || d._children) {
           toggle(d);
           update(d);
         }
@@ -250,7 +255,20 @@ function update(source) {
       .style("font-size", "13px")
       .style("font-weight", "500")
       .style("fill-opacity", 1e-6)
-      .style("cursor", function(d) { return d.data.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); });
+      .style("cursor", function(d) { return d.data.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); })
+      .on("click", function(event, d) {
+        event.stopPropagation();
+
+        // If node has a URL, open it in new tab
+        if (d.data.url) {
+          window.open(d.data.url, '_blank');
+        }
+        // Otherwise, if it's a folder node, toggle it
+        else if (d.children || d._children) {
+          toggle(d);
+          update(d);
+        }
+      });
 
   nodeEnter.append("title")
     .text(function(d) {
