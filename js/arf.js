@@ -196,7 +196,7 @@ function update(source) {
   console.log("Selecting existing nodes...");
   var node = vis.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); });
-  console.log("Node selection:", node.size(), "existing nodes");
+  console.log("Node selection created with", nodes.length, "data items");
 
   // Enter any new nodes at the parent's previous position.
   console.log("Creating new nodes...");
