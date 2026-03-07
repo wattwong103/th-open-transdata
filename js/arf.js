@@ -29,12 +29,13 @@ console.log("Margins:", margin);
 addDebugMessage('SVG size: ' + width + 'x' + height);
 
 console.log("Creating D3 tree layout...");
-var tree = d3.layout.tree()
+var tree = d3.tree()
     .size([height, width]);
 console.log("Tree layout created:", tree);
 
-var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+var diagonal = d3.linkHorizontal()
+    .x(d => d.y)
+    .y(d => d.x);
 
 // Color function based on depth
 function nodeColor(d) {
@@ -52,10 +53,10 @@ function nodeStroke(d) {
 }
 
 // Create SVG with zoom behavior
-var zoom = d3.behavior.zoom()
+var zoom = d3.zoom()
     .scaleExtent([0.3, 3])
-    .on("zoom", function() {
-      vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    .on("zoom", (event) => {
+      vis.attr("transform", event.transform);
     });
 
 console.log("Selecting #body element...");
@@ -63,7 +64,7 @@ var bodyElement = d3.select("#body");
 console.log("Body element found:", bodyElement.node());
 
 console.log("Creating SVG element...");
-var svg = bodyElement.append("svg:svg")
+var svg = bodyElement.append("svg")
     .attr("width", width + margin[1] + margin[3])
     .attr("height", height + margin[0] + margin[2])
     .call(zoom);
@@ -90,34 +91,28 @@ feMerge.append("feMergeNode");
 feMerge.append("feMergeNode")
     .attr("in", "SourceGraphic");
 
-var vis = svg.append("svg:g")
+var vis = svg.append("g")
     .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
 console.log("Loading arf.json...");
 addDebugMessage('Loading arf.json...');
-d3.json("arf.json", function(error, json) {
-  console.log("d3.json callback fired!");
-  console.log("Error:", error);
-  console.log("JSON data:", json);
-  addDebugMessage('d3.json callback fired!');
+d3.json("arf.json")
+  .then(function(json) {
+    console.log("d3.json Promise resolved!");
+    console.log("JSON data:", json);
+    addDebugMessage('d3.json loaded successfully!');
 
-  if (error) {
-    console.error("Error loading arf.json:", error);
-    addDebugMessage('❌ ERROR loading JSON: ' + error, true);
-    return;
-  }
+    if (!json) {
+      console.error("JSON is null or undefined");
+      addDebugMessage('❌ JSON is null!', true);
+      return;
+    }
 
-  if (!json) {
-    console.error("JSON is null or undefined");
-    addDebugMessage('❌ JSON is null!', true);
-    return;
-  }
+    console.log("JSON loaded successfully!");
+    console.log("Root has children:", json.children ? json.children.length : "NO CHILDREN");
+    addDebugMessage('✓ JSON loaded: ' + (json.children ? json.children.length + ' categories' : 'NO CHILDREN'));
 
-  console.log("JSON loaded successfully!");
-  console.log("Root has children:", json.children ? json.children.length : "NO CHILDREN");
-  addDebugMessage('✓ JSON loaded: ' + (json.children ? json.children.length + ' categories' : 'NO CHILDREN'));
-
-  root = json;
+    root = d3.hierarchy(json);
   root.x0 = height / 2;
   root.y0 = 0;
 
@@ -162,7 +157,7 @@ d3.json("arf.json", function(error, json) {
   // For now, keep first level expanded (collapse depth >= 2)
   console.log("Collapsing grandchildren...");
   root.children.forEach(function(child) {
-    console.log("Processing child:", child.name);
+    console.log("Processing child:", child.data.name);
     if (child.children) {
       console.log("  Child has", child.children.length, "children");
       child.children.forEach(function(grandchild) {
@@ -176,6 +171,10 @@ d3.json("arf.json", function(error, json) {
   update(root);
   console.log("update(root) completed!");
   addDebugMessage('✓ Rendering complete!');
+})
+.catch(function(error) {
+  console.error("Error loading arf.json:", error);
+  addDebugMessage('❌ ERROR loading JSON: ' + error, true);
 });
 
 function update(source) {
@@ -184,8 +183,9 @@ function update(source) {
   console.log("Root:", root);
 
   // Compute the new tree layout.
-  console.log("Computing tree.nodes(root)...");
-  var nodes = tree.nodes(root).reverse();
+  console.log("Computing tree(root)...");
+  var treeData = tree(root);
+  var nodes = treeData.descendants().reverse();
   console.log("Nodes computed:", nodes.length, "nodes");
   addDebugMessage('Computing ' + nodes.length + ' nodes...');
 
@@ -200,7 +200,7 @@ function update(source) {
 
   // Enter any new nodes at the parent's previous position.
   console.log("Creating new nodes...");
-  var nodeEnter = node.enter().append("svg:g")
+  var nodeEnter = node.enter().append("g")
       .attr("class", function(d) {
         return d.children || d._children ? "node folder" : "node leaf";
       })
@@ -218,12 +218,12 @@ function update(source) {
           .attr("r", 8);
       });
 
-  // Count new nodes safely (D3 v3 stores selections as arrays)
-  var newNodeCount = (nodeEnter && nodeEnter[0]) ? nodeEnter[0].length : 0;
+  // D3 v7: selections have .size() method
+  var newNodeCount = nodeEnter.size();
   console.log("NodeEnter selection:", newNodeCount, "new nodes to create");
   addDebugMessage('✓ Creating ' + newNodeCount + ' new nodes');
 
-  nodeEnter.append("svg:circle")
+  nodeEnter.append("circle")
       .attr("r", 1e-6)
       .style("fill", function(d) {
         return d._children ? nodeColor(d) : nodeColor(d);
@@ -231,43 +231,30 @@ function update(source) {
       .style("stroke", function(d) { return nodeStroke(d); })
       .style("stroke-width", "2px")
       .style("filter", "url(#drop-shadow)")
-      .on("click", function(d) {
+      .on("click", function(event, d) {
         // Only toggle if it's a folder node (has children or _children)
         if (d.children || d._children) {
-          d3.event.stopPropagation();
+          event.stopPropagation();
           toggle(d);
           update(d);
         }
       });
 
-  // Add text - wrapped in <a> if it has a URL, otherwise plain text
-  var textElement = nodeEnter.append(function(d) {
-    if (d.url) {
-      // Create an <a> element for nodes with URLs
-      var a = document.createElementNS("http://www.w3.org/2000/svg", "a");
-      a.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", d.url);
-      a.setAttribute("target", "_blank");
-      return a;
-    } else {
-      // Create a <g> element for folder nodes
-      return document.createElementNS("http://www.w3.org/2000/svg", "g");
-    }
-  });
-
-  textElement.append("svg:text")
+  // Add text labels to nodes
+  nodeEnter.append("text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
+      .text(function(d) { return d.data.name; })
       .style("fill", "#e2e8f0")
       .style("font-size", "13px")
       .style("font-weight", "500")
       .style("fill-opacity", 1e-6)
-      .style("cursor", function(d) { return d.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); });
+      .style("cursor", function(d) { return d.data.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); });
 
-  nodeEnter.append("svg:title")
+  nodeEnter.append("title")
     .text(function(d) {
-      return d.description;
+      return d.data.description;
     });
 
   // Transition nodes to their new position.
@@ -308,10 +295,10 @@ function update(source) {
 
   // Update the links…
   var link = vis.selectAll("path.link")
-      .data(tree.links(nodes), function(d) { return d.target.id; });
+      .data(treeData.links(), function(d) { return d.target.id; });
 
   // Enter any new links at the parent's previous position.
-  link.enter().insert("svg:path", "g")
+  link.enter().insert("path", "g")
       .attr("class", "link")
       .attr("d", function(d) {
         var o = {x: source.x0, y: source.y0};
