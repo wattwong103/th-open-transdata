@@ -218,8 +218,10 @@ function update(source) {
           .attr("r", 8);
       });
 
-  console.log("NodeEnter selection:", nodeEnter[0].length, "new nodes to create");
-  addDebugMessage('✓ Creating ' + nodeEnter[0].length + ' new nodes');
+  // Count new nodes safely (D3 v3 stores selections as arrays)
+  var newNodeCount = (nodeEnter && nodeEnter[0]) ? nodeEnter[0].length : 0;
+  console.log("NodeEnter selection:", newNodeCount, "new nodes to create");
+  addDebugMessage('✓ Creating ' + newNodeCount + ' new nodes');
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
