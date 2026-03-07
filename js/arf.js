@@ -258,12 +258,18 @@ function update(source) {
     });
 
   // Transition nodes to their new position.
-  // D3 v7: Merge enter and update selections before transitioning
-  var nodeUpdate = nodeEnter.merge(node).transition()
+  // D3 v7: Merge selections first, then apply transitions separately
+  var nodeUpdate = nodeEnter.merge(node);
+
+  // Apply transition to group transform
+  nodeUpdate.transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
+  // Apply transition to circles with explicit .transition()
   nodeUpdate.select("circle")
+      .transition()
+      .duration(duration)
       .attr("r", 8)
       .style("fill", function(d) {
         if (d._children) {
@@ -279,19 +285,28 @@ function update(source) {
         }
       });
 
+  // Apply transition to text with explicit .transition()
   nodeUpdate.select("text")
+      .transition()
+      .duration(duration)
       .style("fill-opacity", 1);
 
   // Transition exiting nodes to the parent's new position.
-  var nodeExit = node.exit().transition()
+  var nodeExit = node.exit();
+
+  nodeExit.transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
       .remove();
 
   nodeExit.select("circle")
+      .transition()
+      .duration(duration)
       .attr("r", 1e-6);
 
   nodeExit.select("text")
+      .transition()
+      .duration(duration)
       .style("fill-opacity", 1e-6);
 
   // Update the links…
