@@ -1,3 +1,22 @@
+console.log("=== ARF.JS STARTED ===");
+console.log("Window dimensions:", window.innerWidth, "x", window.innerHeight);
+
+// Add debug display to page
+function addDebugMessage(msg, isError) {
+  var debugDiv = document.getElementById('debug-output');
+  if (!debugDiv) {
+    debugDiv = document.createElement('div');
+    debugDiv.id = 'debug-output';
+    debugDiv.style.cssText = 'position:fixed;top:80px;left:10px;background:' + (isError ? '#dc2626' : '#059669') + ';color:white;padding:10px;border-radius:5px;font-family:monospace;font-size:12px;max-width:400px;z-index:9999;';
+    document.body.appendChild(debugDiv);
+  }
+  debugDiv.innerHTML += msg + '<br>';
+  console.log(msg);
+}
+
+addDebugMessage('✓ ARF.JS loaded');
+addDebugMessage('Window: ' + window.innerWidth + 'x' + window.innerHeight);
+
 var margin = [20, 60, 20, 60],
     width = window.innerWidth - margin[1] - margin[3],
     height = window.innerHeight * 0.9 - margin[0] - margin[2],
@@ -5,8 +24,14 @@ var margin = [20, 60, 20, 60],
     duration = 1250,
     root;
 
+console.log("Calculated dimensions - width:", width, "height:", height);
+console.log("Margins:", margin);
+addDebugMessage('SVG size: ' + width + 'x' + height);
+
+console.log("Creating D3 tree layout...");
 var tree = d3.layout.tree()
     .size([height, width]);
+console.log("Tree layout created:", tree);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
@@ -33,10 +58,17 @@ var zoom = d3.behavior.zoom()
       vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     });
 
-var svg = d3.select("#body").append("svg:svg")
+console.log("Selecting #body element...");
+var bodyElement = d3.select("#body");
+console.log("Body element found:", bodyElement.node());
+
+console.log("Creating SVG element...");
+var svg = bodyElement.append("svg:svg")
     .attr("width", width + margin[1] + margin[3])
     .attr("height", height + margin[0] + margin[2])
     .call(zoom);
+console.log("SVG created:", svg.node());
+addDebugMessage('✓ SVG element created');
 
 // Add drop shadow filter
 var defs = svg.append("defs");
@@ -61,11 +93,29 @@ feMerge.append("feMergeNode")
 var vis = svg.append("svg:g")
     .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
+console.log("Loading arf.json...");
+addDebugMessage('Loading arf.json...');
 d3.json("arf.json", function(error, json) {
+  console.log("d3.json callback fired!");
+  console.log("Error:", error);
+  console.log("JSON data:", json);
+  addDebugMessage('d3.json callback fired!');
+
   if (error) {
     console.error("Error loading arf.json:", error);
+    addDebugMessage('❌ ERROR loading JSON: ' + error, true);
     return;
   }
+
+  if (!json) {
+    console.error("JSON is null or undefined");
+    addDebugMessage('❌ JSON is null!', true);
+    return;
+  }
+
+  console.log("JSON loaded successfully!");
+  console.log("Root has children:", json.children ? json.children.length : "NO CHILDREN");
+  addDebugMessage('✓ JSON loaded: ' + (json.children ? json.children.length + ' categories' : 'NO CHILDREN'));
 
   root = json;
   root.x0 = height / 2;
@@ -110,29 +160,46 @@ d3.json("arf.json", function(error, json) {
   // First, let D3 calculate depths by calling update which calls tree.nodes(root)
   // Then collapse based on calculated depths
   // For now, keep first level expanded (collapse depth >= 2)
+  console.log("Collapsing grandchildren...");
   root.children.forEach(function(child) {
+    console.log("Processing child:", child.name);
     if (child.children) {
+      console.log("  Child has", child.children.length, "children");
       child.children.forEach(function(grandchild) {
         collapse(grandchild);
       });
     }
   });
 
+  console.log("Calling update(root)...");
+  addDebugMessage('Calling update()...');
   update(root);
+  console.log("update(root) completed!");
+  addDebugMessage('✓ Rendering complete!');
 });
 
 function update(source) {
+  console.log("=== UPDATE FUNCTION CALLED ===");
+  console.log("Source:", source);
+  console.log("Root:", root);
+
   // Compute the new tree layout.
+  console.log("Computing tree.nodes(root)...");
   var nodes = tree.nodes(root).reverse();
+  console.log("Nodes computed:", nodes.length, "nodes");
+  addDebugMessage('Computing ' + nodes.length + ' nodes...');
 
   // Normalize for fixed-depth.
   nodes.forEach(function(d) { d.y = d.depth * 180; });
 
   // Update the nodes…
+  console.log("Selecting existing nodes...");
   var node = vis.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); });
+  console.log("Node selection:", node.size(), "existing nodes");
 
   // Enter any new nodes at the parent's previous position.
+  console.log("Creating new nodes...");
   var nodeEnter = node.enter().append("svg:g")
       .attr("class", function(d) {
         return d.children || d._children ? "node folder" : "node leaf";
@@ -150,6 +217,9 @@ function update(source) {
           .duration(200)
           .attr("r", 8);
       });
+
+  console.log("NodeEnter size:", nodeEnter.size());
+  addDebugMessage('✓ Created ' + nodeEnter.size() + ' new nodes');
 
   nodeEnter.append("svg:circle")
       .attr("r", 1e-6)
