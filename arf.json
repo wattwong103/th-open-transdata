@@ -51,6 +51,18 @@
               "type": "url",
               "url": "https://data.go.th/dataset?tags=road+safety",
               "description": "Road accident statistics and road safety information"
+            },
+            {
+              "name": "M-Flow Toll System (G)",
+              "type": "url",
+              "url": "https://mflowthai.com/",
+              "description": "Department of Highways' free-flow electronic toll system on Thai motorways"
+            },
+            {
+              "name": "Thai Road Safety Center - ThaiRSC (G)(O)",
+              "type": "url",
+              "url": "https://www.thairsc.com/",
+              "description": "Real-time Thailand road accident dashboard, fatalities and injury statistics"
             }
           ],
           "name": "Thailand Government Agencies",
@@ -111,6 +123,18 @@
               "type": "url",
               "url": "https://drt.gdcatalog.go.th",
               "description": "Rail system KPIs, electric train data"
+            },
+            {
+              "name": "Mass Rapid Transit Authority (MRTA) Ridership (G)",
+              "type": "url",
+              "url": "https://www.mrta.co.th/th/number-of-passengers-of-the-mrta-project",
+              "description": "Annual MRT ridership statistics by year for Bangkok metro projects"
+            },
+            {
+              "name": "Bangkok Expressway and Metro (BEM) Ridership Report (C)",
+              "type": "url",
+              "url": "https://investor.bemplc.co.th/en/ridership-report/ridership",
+              "description": "Monthly MRT Blue/Purple Line ridership and farebox revenue data"
             }
           ],
           "name": "Thailand Rail Agencies",
@@ -153,6 +177,18 @@
               "type": "url",
               "url": "http://gdcatalog.airports.go.th",
               "description": "Flight and passenger statistics for regional airports"
+            },
+            {
+              "name": "Aeronautical Radio of Thailand (AEROTHAI) (G)",
+              "type": "url",
+              "url": "https://www.aerothai.co.th/en/home",
+              "description": "Air navigation services, ATM data, annual reports, flight volume statistics"
+            },
+            {
+              "name": "CAAT Annual Safety Reports (G)",
+              "type": "url",
+              "url": "https://www.caat.or.th/",
+              "description": "Civil Aviation Authority of Thailand reports, safety oversight, ICAO audit results"
             }
           ],
           "name": "Thailand Aviation Agencies",
@@ -183,6 +219,12 @@
               "type": "url",
               "url": "https://port.gdcatalog.go.th",
               "description": "Port throughput, vessel statistics for major ports"
+            },
+            {
+              "name": "Map Ta Phut Industrial Port Statistics (G)",
+              "type": "url",
+              "url": "https://www.maptaphutport.com/maptaphut/index.php/en/services-en/statistics-en/statistics-of-vessels-and-import-export-cargoes",
+              "description": "Vessel calls and import/export cargo volumes for Thailand's largest industrial port"
             }
           ],
           "name": "Thailand Maritime Agencies",
@@ -231,6 +273,30 @@
               "type": "url",
               "url": "https://drt.gdcatalog.go.th",
               "description": "Electric rail system performance and passenger data"
+            },
+            {
+              "name": "ViaBus - Live Transit Tracking (C)",
+              "type": "url",
+              "url": "https://www.viabus.co/",
+              "description": "Real-time bus, boat, songthaew tracking across 70+ Thai provinces"
+            },
+            {
+              "name": "OTP Data Catalog (G)(O)",
+              "type": "url",
+              "url": "https://otp.gdcatalog.go.th/",
+              "description": "Office of Transport and Traffic Policy and Planning open dataset catalog"
+            },
+            {
+              "name": "Namtang Open Data API (G)(O)",
+              "type": "url",
+              "url": "https://namtang-api.otp.go.th/opendata",
+              "description": "GTFS-format Bangkok bus stops, routes, schedules, rail and pier data"
+            },
+            {
+              "name": "Longdo Map ITS Open Data Resources (O)",
+              "type": "url",
+              "url": "https://map-blog.longdo.com/thailand-its-open-data/",
+              "description": "Curated catalog of Thailand ITS, transit and map open-data sources"
             }
           ],
           "name": "Thailand Urban Transit",
@@ -291,6 +357,12 @@
               "type": "url",
               "url": "https://lineman.line.me",
               "description": "Food delivery and logistics, owned by LINE Thailand"
+            },
+            {
+              "name": "EPPO Energy Statistics & API (G)(O)",
+              "type": "url",
+              "url": "https://www.eppo.go.th/index.php/th/energy-information",
+              "description": "Energy Policy and Planning Office: fuel consumption, EV charging electricity, transport energy"
             }
           ],
           "name": "Thailand Emerging Mobility",
@@ -399,6 +471,18 @@
               "type": "url",
               "url": "https://www.customs.go.th/statistic_report.php?ini_content=statistics_report&lang=en",
               "description": "Vehicle imports/exports, Chapter 87 automotive trade data"
+            },
+            {
+              "name": "NESDC Thailand Logistics Report (G)",
+              "type": "url",
+              "url": "https://www.nesdc.go.th/main.php?filename=logistic",
+              "description": "National Economic and Social Development Council's annual logistics cost and performance report"
+            },
+            {
+              "name": "Federation of Thai Industries Vehicle Stats (C)",
+              "type": "url",
+              "url": "https://www.fti.or.th/",
+              "description": "Monthly Thailand vehicle production, exports, HEV/BEV breakdown by FTI"
             }
           ],
           "name": "Thailand National Statistics",
@@ -477,6 +561,12 @@
               "type": "url",
               "url": "https://ait.ac.th",
               "description": "Transportation engineering, infrastructure research"
+            },
+            {
+              "name": "Thailand Accident Research Center (TARC) Portal",
+              "type": "url",
+              "url": "https://www.tarc.or.th/",
+              "description": "TARC research projects, in-depth crash investigations, motorcycle safety publications"
             }
           ],
           "name": "Thailand Academic Research",
