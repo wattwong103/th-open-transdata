@@ -1,21 +1,9 @@
-console.log("=== ARF.JS STARTED ===");
-console.log("Window dimensions:", window.innerWidth, "x", window.innerHeight);
-
-// Add debug display to page
-function addDebugMessage(msg, isError) {
-  var debugDiv = document.getElementById('debug-output');
-  if (!debugDiv) {
-    debugDiv = document.createElement('div');
-    debugDiv.id = 'debug-output';
-    debugDiv.style.cssText = 'position:fixed;top:80px;left:10px;background:' + (isError ? '#dc2626' : '#059669') + ';color:white;padding:10px;border-radius:5px;font-family:monospace;font-size:12px;max-width:400px;z-index:9999;';
-    document.body.appendChild(debugDiv);
-  }
-  debugDiv.innerHTML += msg + '<br>';
-  console.log(msg);
-}
-
-addDebugMessage('✓ ARF.JS loaded');
-addDebugMessage('Window: ' + window.innerWidth + 'x' + window.innerHeight);
+/* =============================================================
+   TODM — Transportation Open Data Map
+   Renders the collapsible D3 source tree (browse mode) and a
+   search + tag-facet result list (find mode) over arf.json.
+   Node colors mirror the design-system dataviz tokens.
+   ============================================================= */
 
 var margin = [20, 60, 20, 60],
     width = window.innerWidth - margin[1] - margin[3],
@@ -24,182 +12,96 @@ var margin = [20, 60, 20, 60],
     duration = 1250,
     root;
 
-console.log("Calculated dimensions - width:", width, "height:", height);
-console.log("Margins:", margin);
-addDebugMessage('SVG size: ' + width + 'x' + height);
-
-console.log("Creating D3 tree layout...");
 var tree = d3.tree()
     .size([height, width]);
-console.log("Tree layout created:", tree);
 
 var diagonal = d3.linkHorizontal()
     .x(d => d.y)
     .y(d => d.x);
 
-// Color function based on depth
+/* ---- Node colors by depth (mirror tokens/dataviz.css) ---- */
 function nodeColor(d) {
-  if (d.depth === 0) return "#4338ca"; // deep indigo for root
-  if (d.depth === 1) return "#0d9488"; // teal for categories
-  if (d.depth === 2) return "#ea580c"; // coral/orange for sub-categories
-  return "#059669"; // emerald for leaves
+  if (d.depth === 0) return "#1a4c82"; // navy-600 — root anchor
+  if (d.depth === 1) return "#4f8dd6"; // viz-1 blue — categories
+  if (d.depth === 2) return "#e8633f"; // viz-3 coral — sub-categories
+  return "#2fb6a8";                    // viz-2 teal — leaves
 }
-
+function nodeColorLight(d) {
+  if (d.depth === 0) return "#4f8dd6";
+  if (d.depth === 1) return "#6fa3d6";
+  if (d.depth === 2) return "#f08a6e";
+  return "#5fcabd";
+}
 function nodeStroke(d) {
-  if (d.depth === 0) return "#6366f1";
-  if (d.depth === 1) return "#14b8a6";
-  if (d.depth === 2) return "#f97316";
-  return "#10b981";
+  if (d.depth === 0) return "#4f8dd6";
+  if (d.depth === 1) return "#6fa3d6";
+  if (d.depth === 2) return "#f08a6e";
+  return "#5fcabd";
 }
 
-// Create SVG with zoom behavior
+/* ---- SVG canvas with zoom ---- */
 var zoom = d3.zoom()
     .scaleExtent([0.3, 3])
     .on("zoom", (event) => {
       vis.attr("transform", event.transform);
     });
 
-console.log("Selecting #body element...");
-var bodyElement = d3.select("#body");
-console.log("Body element found:", bodyElement.node());
-
-console.log("Creating SVG element...");
-var svg = bodyElement.append("svg")
+var svg = d3.select("#body").append("svg")
     .attr("width", width + margin[1] + margin[3])
     .attr("height", height + margin[0] + margin[2])
     .call(zoom);
-console.log("SVG created:", svg.node());
-addDebugMessage('✓ SVG element created');
-
-// Add drop shadow filter
-var defs = svg.append("defs");
-var filter = defs.append("filter")
-    .attr("id", "drop-shadow")
-    .attr("height", "130%");
-
-filter.append("feGaussianBlur")
-    .attr("in", "SourceAlpha")
-    .attr("stdDeviation", 3);
-
-filter.append("feOffset")
-    .attr("dx", 0)
-    .attr("dy", 2)
-    .attr("result", "offsetblur");
-
-var feMerge = filter.append("feMerge");
-feMerge.append("feMergeNode");
-feMerge.append("feMergeNode")
-    .attr("in", "SourceGraphic");
 
 var vis = svg.append("g")
     .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
 
-console.log("Loading arf.json...");
-addDebugMessage('Loading arf.json...');
 d3.json("arf.json")
   .then(function(json) {
-    console.log("d3.json Promise resolved!");
-    console.log("JSON data:", json);
-    addDebugMessage('d3.json loaded successfully!');
-
-    if (!json) {
-      console.error("JSON is null or undefined");
-      addDebugMessage('❌ JSON is null!', true);
-      return;
-    }
-
-    console.log("JSON loaded successfully!");
-    console.log("Root has children:", json.children ? json.children.length : "NO CHILDREN");
-    addDebugMessage('✓ JSON loaded: ' + (json.children ? json.children.length + ' categories' : 'NO CHILDREN'));
+    if (!json) return;
 
     root = d3.hierarchy(json);
-  root.x0 = height / 2;
-  root.y0 = 0;
+    root.x0 = height / 2;
+    root.y0 = 0;
 
-  function collapse(d) {
-    if (d.children) {
-      d._children = d.children;
-      d._children.forEach(collapse);
-      d.children = null;
-    }
-  }
+    // Build the flat search index from the full hierarchy (before collapse).
+    buildSearchIndex(root);
+    setupFind();
 
-  // Collapse from level 2 onwards (keep root and first level expanded)
-  function collapseFromLevel(d, currentDepth, targetDepth) {
-    if (d.children) {
-      if (currentDepth >= targetDepth) {
+    function collapse(d) {
+      if (d.children) {
         d._children = d.children;
-        d._children.forEach(function(child) {
-          collapseFromLevel(child, currentDepth + 1, targetDepth);
-        });
-        d.children = null;
-      } else {
-        d.children.forEach(function(child) {
-          collapseFromLevel(child, currentDepth + 1, targetDepth);
-        });
-      }
-    }
-  }
-
-  // Collapse all children recursively except the first level
-  function collapseDeep(d) {
-    if (d.children) {
-      d.children.forEach(collapseDeep);
-      if (d.depth && d.depth >= 1) {
-        d._children = d.children;
+        d._children.forEach(collapse);
         d.children = null;
       }
     }
-  }
 
-  // First, let D3 calculate depths by calling update which calls tree.nodes(root)
-  // Then collapse based on calculated depths
-  // For now, keep first level expanded (collapse depth >= 2)
-  console.log("Collapsing grandchildren...");
-  root.children.forEach(function(child) {
-    console.log("Processing child:", child.data.name);
-    if (child.children) {
-      console.log("  Child has", child.children.length, "children");
-      child.children.forEach(function(grandchild) {
-        collapse(grandchild);
-      });
-    }
+    // Keep root + first level expanded, collapse grandchildren onward.
+    root.children.forEach(function(child) {
+      if (child.children) {
+        child.children.forEach(function(grandchild) {
+          collapse(grandchild);
+        });
+      }
+    });
+
+    update(root);
+  })
+  .catch(function(error) {
+    console.error("Error loading arf.json:", error);
   });
 
-  console.log("Calling update(root)...");
-  addDebugMessage('Calling update()...');
-  update(root);
-  console.log("update(root) completed!");
-  addDebugMessage('✓ Rendering complete!');
-})
-.catch(function(error) {
-  console.error("Error loading arf.json:", error);
-  addDebugMessage('❌ ERROR loading JSON: ' + error, true);
-});
-
 function update(source) {
-  console.log("=== UPDATE FUNCTION CALLED ===");
-  console.log("Source:", source);
-  console.log("Root:", root);
-
   // Compute the new tree layout.
-  console.log("Computing tree(root)...");
   var treeData = tree(root);
   var nodes = treeData.descendants().reverse();
-  console.log("Nodes computed:", nodes.length, "nodes");
-  addDebugMessage('Computing ' + nodes.length + ' nodes...');
 
   // Normalize for fixed-depth.
   nodes.forEach(function(d) { d.y = d.depth * 180; });
 
   // Update the nodes…
-  console.log("Selecting existing nodes...");
   var node = vis.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); });
-  console.log("Node selection created with", nodes.length, "data items");
 
   // Enter any new nodes at the parent's previous position.
-  console.log("Creating new nodes...");
   var nodeEnter = node.enter().append("g")
       .attr("class", function(d) {
         return d.children || d._children ? "node folder" : "node leaf";
@@ -218,32 +120,12 @@ function update(source) {
           .attr("r", 8);
       });
 
-  // D3 v7: selections have .size() method
-  var newNodeCount = nodeEnter.size();
-  console.log("NodeEnter selection:", newNodeCount, "new nodes to create");
-  addDebugMessage('✓ Creating ' + newNodeCount + ' new nodes');
-
   nodeEnter.append("circle")
       .attr("r", 1e-6)
-      .style("fill", function(d) {
-        return d._children ? nodeColor(d) : nodeColor(d);
-      })
+      .style("fill", function(d) { return nodeColor(d); })
       .style("stroke", function(d) { return nodeStroke(d); })
       .style("stroke-width", "2px")
-      .style("filter", "url(#drop-shadow)")
-      .on("click", function(event, d) {
-        event.stopPropagation();
-
-        // If node has a URL, open it in new tab
-        if (d.data.url) {
-          window.open(d.data.url, '_blank');
-        }
-        // Otherwise, if it's a folder node, toggle it
-        else if (d.children || d._children) {
-          toggle(d);
-          update(d);
-        }
-      });
+      .on("click", onNodeClick);
 
   // Add text labels to nodes
   nodeEnter.append("text")
@@ -251,24 +133,9 @@ function update(source) {
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
       .text(function(d) { return d.data.name; })
-      .style("fill", "#e2e8f0")
-      .style("font-size", "13px")
-      .style("font-weight", "500")
       .style("fill-opacity", 1e-6)
       .style("cursor", function(d) { return d.data.url ? "pointer" : (d.children || d._children ? "pointer" : "default"); })
-      .on("click", function(event, d) {
-        event.stopPropagation();
-
-        // If node has a URL, open it in new tab
-        if (d.data.url) {
-          window.open(d.data.url, '_blank');
-        }
-        // Otherwise, if it's a folder node, toggle it
-        else if (d.children || d._children) {
-          toggle(d);
-          update(d);
-        }
-      });
+      .on("click", onNodeClick);
 
   nodeEnter.append("title")
     .text(function(d) {
@@ -276,34 +143,21 @@ function update(source) {
     });
 
   // Transition nodes to their new position.
-  // D3 v7: Merge selections first, then apply transitions separately
   var nodeUpdate = nodeEnter.merge(node);
 
-  // Apply transition to group transform
   nodeUpdate.transition()
       .duration(duration)
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
-  // Apply transition to circles with explicit .transition()
   nodeUpdate.select("circle")
       .transition()
       .duration(duration)
       .attr("r", 8)
       .style("fill", function(d) {
-        if (d._children) {
-          // Has collapsed children - darker shade
-          var baseColor = nodeColor(d);
-          return baseColor;
-        } else {
-          // Expanded or leaf - lighter shade
-          if (d.depth === 0) return "#6366f1";
-          if (d.depth === 1) return "#14b8a6";
-          if (d.depth === 2) return "#fb923c";
-          return "#34d399";
-        }
+        // Collapsed (has hidden children) reads darker; expanded / leaf lighter.
+        return d._children ? nodeColor(d) : nodeColorLight(d);
       });
 
-  // Apply transition to text with explicit .transition()
   nodeUpdate.select("text")
       .transition()
       .duration(duration)
@@ -363,6 +217,17 @@ function update(source) {
   });
 }
 
+// Open a leaf's URL, or toggle a folder's children.
+function onNodeClick(event, d) {
+  event.stopPropagation();
+  if (d.data.url) {
+    window.open(d.data.url, '_blank', 'noopener');
+  } else if (d.children || d._children) {
+    toggle(d);
+    update(d);
+  }
+}
+
 // Toggle children.
 function toggle(d) {
   if (d.children) {
@@ -372,4 +237,163 @@ function toggle(d) {
     d.children = d._children;
     d._children = null;
   }
+}
+
+/* =============================================================
+   Find mode — search + tag facets over a flat leaf index.
+   ============================================================= */
+
+var KNOWN_TAGS = { G: 1, O: 1, R: 1, NA: 1, C: 1 };
+var flatIndex = [];
+var activeFacets = new Set();
+
+// Remove parenthetical uppercase tokens — facet tags AND agency
+// acronyms like (AOT)/(DOH) — from a display name.
+function stripTags(name) {
+  return name.replace(/\s*\([A-Z]+\)/g, '').trim();
+}
+
+// Keep only the recognized classification tags (ignore agency acronyms).
+function parseTags(name) {
+  var out = [], m, re = /\(([A-Z]+)\)/g;
+  while ((m = re.exec(name))) {
+    if (KNOWN_TAGS[m[1]] && out.indexOf(m[1]) === -1) out.push(m[1]);
+  }
+  return out;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, function(c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function buildSearchIndex(rootNode) {
+  rootNode.leaves().forEach(function(leaf) {
+    if (!leaf.data.url) return;
+    var category = '', subcategory = '';
+    leaf.ancestors().forEach(function(a) {
+      if (a.depth === 1) category = stripTags(a.data.name);
+      if (a.depth === 2 && a !== leaf) subcategory = stripTags(a.data.name);
+    });
+    flatIndex.push({
+      name: stripTags(leaf.data.name),
+      url: leaf.data.url,
+      description: leaf.data.description || '',
+      category: category,
+      subcategory: subcategory,
+      tags: parseTags(leaf.data.name)
+    });
+  });
+}
+
+function setupFind() {
+  var searchInput = document.getElementById('search');
+  var clearBtn = document.getElementById('search-clear');
+  var treePane = document.getElementById('body');
+  var resultsPane = document.getElementById('results');
+  var grid = document.getElementById('result-grid');
+  var countEl = document.getElementById('results-count');
+  var emptyEl = document.getElementById('results-empty');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.facet-chip'));
+
+  if (!searchInput) return;
+
+  searchInput.placeholder = 'Search ' + flatIndex.length + ' open-data sources…';
+
+  function renderResults(matches) {
+    countEl.innerHTML = '<strong>' + matches.length + '</strong> ' +
+      (matches.length === 1 ? 'source' : 'sources') + ' found';
+    emptyEl.hidden = matches.length !== 0;
+
+    var frag = document.createDocumentFragment();
+    matches.forEach(function(item) {
+      var a = document.createElement('a');
+      a.className = 'result-card';
+      a.href = item.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+
+      var crumb = item.category + (item.subcategory ? ' › ' + item.subcategory : '');
+      var badges = item.tags.map(function(t) {
+        return '<span class="badge badge--' + t.toLowerCase() + '">' + t + '</span>';
+      }).join('');
+
+      a.innerHTML =
+        '<div class="result-card__head">' +
+          '<h3 class="result-card__title">' + escapeHtml(item.name) + '</h3>' +
+          '<span class="result-card__open" aria-hidden="true">↗</span>' +
+        '</div>' +
+        (crumb ? '<p class="result-card__crumb">' + escapeHtml(crumb) + '</p>' : '') +
+        (item.description ? '<p class="result-card__desc">' + escapeHtml(item.description) + '</p>' : '') +
+        (badges ? '<div class="result-card__tags">' + badges + '</div>' : '');
+
+      frag.appendChild(a);
+    });
+    grid.innerHTML = '';
+    grid.appendChild(frag);
+  }
+
+  function apply() {
+    var q = searchInput.value.trim().toLowerCase();
+    clearBtn.hidden = q.length === 0;
+
+    var active = q.length > 0 || activeFacets.size > 0;
+    if (!active) {
+      resultsPane.hidden = true;
+      treePane.hidden = false;
+      return;
+    }
+
+    var matches = flatIndex.filter(function(item) {
+      var textOk = !q ||
+        item.name.toLowerCase().indexOf(q) !== -1 ||
+        item.description.toLowerCase().indexOf(q) !== -1 ||
+        item.category.toLowerCase().indexOf(q) !== -1 ||
+        item.subcategory.toLowerCase().indexOf(q) !== -1;
+      var facetOk = activeFacets.size === 0 ||
+        item.tags.some(function(t) { return activeFacets.has(t); });
+      return textOk && facetOk;
+    });
+
+    treePane.hidden = true;
+    resultsPane.hidden = false;
+    renderResults(matches);
+  }
+
+  function syncChips() {
+    chips.forEach(function(c) {
+      var f = c.dataset.facet;
+      var on = f === 'all' ? activeFacets.size === 0 : activeFacets.has(f);
+      c.classList.toggle('is-active', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  chips.forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      var f = chip.dataset.facet;
+      if (f === 'all') {
+        activeFacets.clear();
+      } else if (activeFacets.has(f)) {
+        activeFacets.delete(f);
+      } else {
+        activeFacets.add(f);
+      }
+      syncChips();
+      apply();
+    });
+  });
+
+  var debounce;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(debounce);
+    debounce = setTimeout(apply, 150);
+  });
+
+  clearBtn.addEventListener('click', function() {
+    searchInput.value = '';
+    searchInput.focus();
+    apply();
+  });
 }
