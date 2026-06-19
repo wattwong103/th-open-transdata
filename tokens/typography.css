@@ -1,0 +1,68 @@
+/* =============================================================
+   Typography — Roboto Slab (display), Roboto (text/UI),
+   Roboto Mono (metadata/code).
+   Type scale is a modular ~1.2 progression on a 16px base,
+   tuned for academic reading: generous line-height on body,
+   tight on display.
+   ============================================================= */
+:root {
+  /* ---- Families ---- */
+  --font-display: "Roboto Slab", Georgia, "Times New Roman", serif;
+  --font-sans: "Roboto", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Roboto Mono", "SF Mono", "Menlo", ui-monospace, monospace;
+
+  /* ---- Weights ---- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* ---- Type scale (px values, rem-friendly) ---- */
+  --text-2xs: 0.6875rem; /* 11px — micro labels */
+  --text-xs: 0.75rem; /* 12px — meta, captions */
+  --text-sm: 0.875rem; /* 14px — secondary, UI */
+  --text-base: 1rem; /* 16px — body */
+  --text-md: 1.125rem; /* 18px — lead body */
+  --text-lg: 1.375rem; /* 22px — h4 / card title */
+  --text-xl: 1.75rem; /* 28px — h3 */
+  --text-2xl: 2.25rem; /* 36px — h2 */
+  --text-3xl: 3rem; /* 48px — h1 */
+  --text-4xl: 4rem; /* 64px — display */
+
+  /* ---- Line heights ---- */
+  --leading-tight: 1.12;
+  --leading-snug: 1.28;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* ---- Letter spacing ---- */
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.12em; /* eyebrow / overline */
+
+  /* =========================================================
+     SEMANTIC ROLES
+     ========================================================= */
+  --display-font: var(--font-display);
+  --display-size: var(--text-4xl);
+  --display-weight: var(--weight-bold);
+  --display-leading: var(--leading-tight);
+  --display-tracking: var(--tracking-tight);
+
+  --heading-font: var(--font-display);
+  --heading-weight: var(--weight-medium);
+  --heading-leading: var(--leading-snug);
+
+  --body-font: var(--font-sans);
+  --body-size: var(--text-base);
+  --body-leading: var(--leading-relaxed);
+
+  --eyebrow-font: var(--font-mono);
+  --eyebrow-size: var(--text-xs);
+  --eyebrow-tracking: var(--tracking-caps);
+
+  --meta-font: var(--font-mono);
+  --meta-size: var(--text-sm);
+}

@@ -1,0 +1,32 @@
+/* =============================================================
+   Data Visualization — chart palettes.
+   Categorical series stay distinguishable on the dark-navy canvas
+   and on light paper. Sequential + diverging ramps for choropleths
+   (e.g. flood-risk maps) and change maps.
+   ============================================================= */
+:root {
+  /* ---- Categorical (series order) ---- */
+  --viz-1: #4f8dd6; /* blue   — primary series */
+  --viz-2: #2fb6a8; /* teal */
+  --viz-3: #e8633f; /* coral */
+  --viz-4: #e0a93a; /* amber */
+  --viz-5: #8e7cc3; /* violet */
+  --viz-6: #6fa3d6; /* light blue */
+
+  /* ---- Sequential (low → high), blue ramp ---- */
+  --viz-seq-1: #dce8f5;
+  --viz-seq-2: #aecbe8;
+  --viz-seq-3: #6fa3d6;
+  --viz-seq-4: #2563a8;
+  --viz-seq-5: #123862;
+
+  /* ---- Diverging (cool ↔ warm) ---- */
+  --viz-div-low: #2fb6a8; /* teal */
+  --viz-div-mid: #dce2ea; /* neutral */
+  --viz-div-high: #e8633f; /* coral */
+
+  /* ---- Chart furniture ---- */
+  --viz-grid: var(--border-subtle); /* gridlines */
+  --viz-axis: var(--text-faint); /* axis lines / ticks */
+  --viz-label: var(--text-muted); /* axis + legend labels (use --font-mono) */
+}

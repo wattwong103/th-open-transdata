@@ -1,0 +1,33 @@
+/* =============================================================
+   Elevation — radii, borders, shadows, motion.
+   The brand reads "classic + organized": modest radii, hairline
+   borders, soft low-spread shadows. No heavy drop-shadows.
+   ============================================================= */
+:root {
+  /* ---- Radii ---- */
+  --radius-xs: 3px; /* code, tags, small chips */
+  --radius-sm: 6px; /* buttons, inputs (al-folio default) */
+  --radius-md: 10px; /* cards */
+  --radius-lg: 16px; /* large panels */
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* ---- Border widths ---- */
+  --border-hairline: 1px;
+  --border-thick: 2px;
+  --border-accent: 4px; /* blockquote / left-accent rules */
+
+  /* ---- Shadows (soft, cool-tinted) ---- */
+  --shadow-xs: 0 1px 2px rgba(8, 26, 51, 0.06);
+  --shadow-sm: 0 1px 3px rgba(8, 26, 51, 0.08), 0 1px 2px rgba(8, 26, 51, 0.06);
+  --shadow-md: 0 4px 12px rgba(8, 26, 51, 0.1);
+  --shadow-lg: 0 12px 32px rgba(8, 26, 51, 0.14);
+  --shadow-inset: inset 0 1px 2px rgba(8, 26, 51, 0.08);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-base: 200ms; /* @kind other */
+  --duration-slow: 320ms; /* @kind other */
+}

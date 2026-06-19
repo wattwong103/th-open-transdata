@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TODM — Transportation Open Data Map</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--surface-page); color: var(--text-body); }
+    body { font-family: var(--font-sans); font-size: 14px; min-height: 100vh; }
+
+    /* ---- Topbar ---- */
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--surface-card) 92%, transparent);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--divider);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-brand {
+      display: flex; align-items: center; gap: 9px;
+      font-family: var(--font-display); font-weight: 700; font-size: 20px;
+      letter-spacing: -0.02em; color: var(--text-strong); text-decoration: none;
+    }
+    .topbar-brand .dot { color: var(--accent); }
+    .topbar-title {
+      font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .topbar-back {
+      font-family: var(--font-sans); font-size: 14px; color: var(--text-muted);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: color var(--duration-base) var(--ease-standard);
+    }
+    .topbar-back:hover { color: var(--text-strong); }
+
+    /* ---- Tree canvas ---- */
+    #body {
+      margin: 0 auto;
+      position: relative;
+      width: 100%;
+      overflow: visible;
+    }
+    #body svg { display: block; margin: 0 auto; }
+
+    /* ---- Legend ---- */
+    .legend {
+      position: absolute;
+      top: 72px; right: 10px;
+      width: 300px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--surface-card);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-md);
+    }
+    .legend-title {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px;
+    }
+    .legend p { margin: 6px 0; line-height: 1.6; color: var(--text-muted); }
+    .legend code {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--accent); background: var(--surface-tint);
+      padding: 1px 5px; border-radius: var(--radius-xs);
+    }
+
+    /* ---- D3 nodes ---- */
+    .node { cursor: pointer; }
+    .node circle {
+      cursor: pointer; stroke-width: 2px;
+      filter: drop-shadow(0 2px 4px rgba(8,26,51,0.4));
+      transition: all 0.2s ease;
+    }
+    .node:hover circle { filter: drop-shadow(0 0 10px currentColor); }
+    .node text {
+      font-size: 13px; fill: var(--text-body); font-weight: 500;
+      font-family: var(--font-sans);
+    }
+    .node.folder text { pointer-events: none; }
+    .node.leaf text { pointer-events: auto; }
+    path.link {
+      fill: none; stroke: var(--border-subtle); stroke-width: 1.5px;
+    }
+
+    /* ---- Info cards ---- */
+    .info-sections {
+      max-width: var(--container-content);
+      margin: 40px auto; padding: 0 24px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+    .info-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      box-shadow: var(--shadow-xs);
+    }
+    .info-card h3 {
+      font-family: var(--font-display); font-size: 16px; font-weight: 500;
+      color: var(--accent); margin: 0 0 10px;
+    }
+    .info-card p { margin: 6px 0; line-height: 1.65; color: var(--text-muted); font-size: 13px; }
+    .info-card a { color: var(--text-link); text-decoration: none; }
+    .info-card a:hover { color: var(--text-link-hover); text-decoration: underline; }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      border-top: 1px solid var(--divider); margin-top: var(--space-8);
+      padding: 24px; text-align: center;
+      font-family: var(--font-sans); font-size: 13px; color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .legend { position: relative; top: auto; right: auto; width: auto; margin: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="topbar-brand" href="index.html">
+      <img src="assets/favicon.svg" width="26" height="26" alt="" />
+      W<span class="dot">.</span>Wongkaew
+    </a>
+    <span class="topbar-title">TODM — Transportation Open Data Map</span>
+    <a class="topbar-back" href="index.html">← Home</a>
+  </div>
+
+  <div id="body"></div>
+
+  <div class="legend">
+    <div class="legend-title">Legend</div>
+    <p><code>(G)</code> Government-owned</p>
+    <p><code>(O)</code> Open-source project</p>
+    <p><code>(R)</code> Requires registration</p>
+    <p><code>(NA)</code> May not contain usable data</p>
+    <p><code>(C)</code> May contain commercial data</p>
+  </div>
+
+  <div class="info-sections">
+    <div class="info-card">
+      <h3>About TODM</h3>
+      <p>Gathers free and open transportation resources in one place. The intention is to help people find free resources. Some sites may require registration or offer more data for a cost.</p>
+      <p>Originally created from a transportation infrastructure perspective — contributions from other fields are very welcome.</p>
+    </div>
+    <div class="info-card">
+      <h3>Updates &amp; Notifications</h3>
+      <p>Email: <a href="mailto:watcharapong.w@chula.ac.th">watcharapong.w@chula.ac.th</a></p>
+      <p>Watch or star: <a href="https://github.com/wattwong103/th-open-transdata" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="info-card">
+      <h3>Feedback &amp; Suggestions</h3>
+      <p>Feedback and new tool suggestions are extremely welcome. Reach out via email or submit a pull request on GitHub.</p>
+    </div>
+    <div class="info-card">
+      <h3>Created by</h3>
+      <p>W. Wongkaew — Civil Engineering,<br />The University of Tokyo</p>
+      <p><a href="site.html">Personal site →</a></p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    © 2026 Watcharapong Wongkaew · <a href="index.html" style="color:inherit;">W.Wongkaew</a>
+  </footer>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    /* ---- Node color using design system palette ---- */
+    function nodeColor(d) {
+      if (d.depth === 0) return "#123862"; /* --navy-700: brand */
+      if (d.depth === 1) return "#2563a8"; /* --blue-500: accent */
+      if (d.depth === 2) return "#e0533d"; /* --coral-500: highlight */
+      return "#2fb6a8";                    /* teal: viz-2 */
+    }
+    function nodeStroke(d) {
+      if (d.depth === 0) return "#1a4c82";
+      if (d.depth === 1) return "#3e7cc0";
+      if (d.depth === 2) return "#e8633f";
+      return "#4f8dd6";
+    }
+
+    var margin = [20, 60, 20, 60],
+        width  = window.innerWidth  - margin[1] - margin[3],
+        height = window.innerHeight * 0.85 - margin[0] - margin[2],
+        i = 0, duration = 1250, root;
+
+    var tree = d3.tree().size([height, width]);
+
+    var diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+
+    var zoom = d3.zoom()
+        .scaleExtent([0.3, 3])
+        .on("zoom", (event) => { vis.attr("transform", event.transform); });
+
+    var svg = d3.select("#body").append("svg")
+        .attr("width",  width  + margin[1] + margin[3])
+        .attr("height", height + margin[0] + margin[2])
+        .call(zoom);
+
+    /* drop-shadow filter */
+    var defs = svg.append("defs");
+    var filter = defs.append("filter").attr("id", "drop-shadow").attr("height", "130%");
+    filter.append("feGaussianBlur").attr("in", "SourceAlpha").attr("stdDeviation", 3);
+    filter.append("feOffset").attr("dx", 0).attr("dy", 2).attr("result", "offsetblur");
+    var feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode");
+    feMerge.append("feMergeNode").attr("in", "SourceGraphic");
+
+    var vis = svg.append("g").attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+
+    d3.json("arf.json").then(function(json) {
+      root = d3.hierarchy(json);
+      root.x0 = height / 2;
+      root.y0 = 0;
+
+      function collapse(d) {
+        if (d.children) {
+          d._children = d.children;
+          d._children.forEach(collapse);
+          d.children = null;
+        }
+      }
+
+      root.children.forEach(function(child) {
+        if (child.children) child.children.forEach(function(gc) { collapse(gc); });
+      });
+
+      update(root);
+    }).catch(function(err) {
+      console.error("Failed to load arf.json:", err);
+    });
+
+    function update(source) {
+      var treeData = tree(root);
+      var nodes = treeData.descendants().reverse();
+
+      nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+      var node = vis.selectAll("g.node")
+          .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+      var nodeEnter = node.enter().append("g")
+          .attr("class", function(d) {
+            return d.children || d._children ? "node folder" : "node leaf";
+          })
+          .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+          .on("mouseover", function(event, d) {
+            d3.select(this).select("circle").transition().duration(200).attr("r", 12);
+          })
+          .on("mouseout", function(event, d) {
+            d3.select(this).select("circle").transition().duration(200).attr("r", 8);
+          });
+
+      nodeEnter.append("circle")
+          .attr("r", 1e-6)
+          .style("fill", function(d) { return nodeColor(d); })
+          .style("stroke", function(d) { return nodeStroke(d); })
+          .style("stroke-width", "2px")
+          .style("filter", "url(#drop-shadow)")
+          .on("click", function(event, d) {
+            event.stopPropagation();
+            if (d.data.url) { window.open(d.data.url, "_blank"); }
+            else if (d.children || d._children) { toggle(d); update(d); }
+          });
+
+      nodeEnter.append("text")
+          .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+          .attr("dy", ".35em")
+          .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
+          .text(function(d) { return d.data.name; })
+          .style("fill", "#c3d2e4")
+          .style("font-size", "13px")
+          .style("font-family", "'Roboto', sans-serif")
+          .style("font-weight", "500")
+          .style("fill-opacity", 1e-6)
+          .style("cursor", function(d) { return d.data.url || d.children || d._children ? "pointer" : "default"; })
+          .on("click", function(event, d) {
+            event.stopPropagation();
+            if (d.data.url) { window.open(d.data.url, "_blank"); }
+            else if (d.children || d._children) { toggle(d); update(d); }
+          });
+
+      nodeEnter.append("title").text(function(d) { return d.data.description || d.data.name; });
+
+      var nodeUpdate = nodeEnter.merge(node);
+
+      nodeUpdate.transition().duration(duration)
+          .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+      nodeUpdate.select("circle").transition().duration(duration)
+          .attr("r", 8)
+          .style("fill", function(d) {
+            if (!d._children) {
+              if (d.depth === 0) return "#1a4c82";
+              if (d.depth === 1) return "#3e7cc0";
+              if (d.depth === 2) return "#e8633f";
+              return "#4f8dd6";
+            }
+            return nodeColor(d);
+          });
+
+      nodeUpdate.select("text").transition().duration(duration).style("fill-opacity", 1);
+
+      var nodeExit = node.exit();
+      nodeExit.transition().duration(duration)
+          .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+          .remove();
+      nodeExit.select("circle").transition().duration(duration).attr("r", 1e-6);
+      nodeExit.select("text").transition().duration(duration).style("fill-opacity", 1e-6);
+
+      var link = vis.selectAll("path.link")
+          .data(treeData.links(), function(d) { return d.target.id; });
+
+      link.enter().insert("path", "g")
+          .attr("class", "link")
+          .attr("d", function(d) {
+            var o = { x: source.x0, y: source.y0 };
+            return diagonal({ source: o, target: o });
+          })
+        .transition().duration(duration).attr("d", diagonal);
+
+      link.transition().duration(duration).attr("d", diagonal);
+
+      link.exit().transition().duration(duration)
+          .attr("d", function(d) {
+            var o = { x: source.x, y: source.y };
+            return diagonal({ source: o, target: o });
+          }).remove();
+
+      nodes.forEach(function(d) { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function toggle(d) {
+      if (d.children) { d._children = d.children; d.children = null; }
+      else { d.children = d._children; d._children = null; }
+    }
+  </script>
+</body>
+</html>

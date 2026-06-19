@@ -1,0 +1,10 @@
+/* =============================================================
+   Fonts — served from Google Fonts CDN.
+   Roboto Slab (display / headings), Roboto (body / UI),
+   Roboto Mono (metadata, code, addresses).
+   These ARE the fonts used by the live wattwong103.github.io
+   (al-folio) site — not a substitution. Self-host later if
+   offline use is needed; see README "Visual Foundations".
+   @import must be the first statement in this file.
+   ============================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap");

@@ -1,0 +1,146 @@
+/* =============================================================
+   Colors — deep-blue academic palette.
+   Base scale first, semantic aliases below.
+   Classic, organized, modern: navy ink + a steel-blue accent,
+   cool-slate neutrals, restrained semantic colors.
+   ============================================================= */
+:root {
+  /* ---- Brand blues (base scale) ---- */
+  --navy-900: #081a33; /* deepest ink-navy — section fills, footers */
+  --navy-800: #0c2747;
+  --navy-700: #123862; /* PRIMARY brand color */
+  --navy-600: #1a4c82;
+  --blue-500: #2563a8; /* interactive / links / accent */
+  --blue-400: #3e7cc0;
+  --blue-300: #6fa3d6;
+  --blue-200: #aecbe8;
+  --blue-100: #dce8f5; /* tint surface */
+  --blue-50: #eef4fb;
+
+  /* ---- Cool-slate neutrals ---- */
+  --ink: #0e1726; /* near-black body text */
+  --slate-700: #2b3a4f;
+  --slate-600: #3f4f66;
+  --slate-500: #5a6b82; /* muted text */
+  --slate-400: #8595a8; /* placeholder / disabled text */
+  --slate-300: #b9c4d2; /* borders strong */
+  --slate-200: #dce2ea; /* borders / dividers */
+  --slate-100: #eef1f5; /* hover fills */
+  --slate-50: #f7f9fc; /* page canvas */
+  --paper: #ffffff;
+
+  /* ---- Semantic status ---- */
+  --green-600: #1f8a5b; /* success */
+  --green-50: #e6f4ee;
+  --amber-600: #b07d00; /* warning */
+  --amber-50: #fbf3df;
+  --red-600: #c0392b; /* danger / error */
+  --red-50: #fbe9e7;
+  --coral-500: #e0533d; /* highlight: awards, "Oral Presentation" */
+
+  /* =========================================================
+     SEMANTIC ALIASES — reference these in components.
+     ========================================================= */
+  /* Surfaces */
+  --surface-page: var(--slate-50);
+  --surface-card: var(--paper);
+  --surface-raised: var(--paper);
+  --surface-sunken: var(--slate-100);
+  --surface-tint: var(--blue-50);
+  --surface-inverse: var(--navy-900);
+
+  /* Text */
+  --text-strong: var(--ink);
+  --text-body: var(--slate-700);
+  --text-muted: var(--slate-500);
+  --text-faint: var(--slate-400);
+  --text-on-dark: #eef4fb;
+  --text-on-accent: #ffffff;
+  --text-link: var(--blue-500);
+  --text-link-hover: var(--navy-700);
+
+  /* Brand / interactive */
+  --brand: var(--navy-700);
+  --brand-strong: var(--navy-800);
+  --accent: var(--blue-500);
+  --accent-hover: var(--navy-600);
+
+  /* Borders & dividers */
+  --border-subtle: var(--slate-200);
+  --border-default: var(--slate-300);
+  --border-strong: var(--slate-500);
+  --border-focus: var(--blue-500);
+  --divider: var(--slate-200);
+
+  /* Status semantics */
+  --status-success: var(--green-600);
+  --status-success-bg: var(--green-50);
+  --status-warning: var(--amber-600);
+  --status-warning-bg: var(--amber-50);
+  --status-danger: var(--red-600);
+  --status-danger-bg: var(--red-50);
+  --status-highlight: var(--coral-500);
+
+  /* Focus ring */
+  --ring: 0 0 0 3px rgba(37, 99, 168, 0.32);
+}
+
+/* =============================================================
+   DARK THEME — the brand's preferred mode.
+   Deep-navy surfaces, brighter blue accent, blue-tinted text.
+   Apply with [data-theme="dark"] on <html> (or any wrapper).
+   Base scale stays the same; only the semantic aliases flip.
+   ============================================================= */
+[data-theme="dark"] {
+  /* Dark navy surface ramp */
+  --navy-canvas: #06182e; /* deepest page bg */
+  --navy-surface: #0e2742; /* card / panel */
+  --navy-surface-2: #143257; /* raised / hover */
+  --navy-line: #1f3f63; /* hairline borders on dark */
+
+  /* Brighter blues for contrast on dark */
+  --accent-bright: #4f8dd6;
+
+  /* Surfaces */
+  --surface-page: var(--navy-canvas);
+  --surface-card: var(--navy-surface);
+  --surface-raised: var(--navy-surface-2);
+  --surface-sunken: #0a1f38;
+  --surface-tint: #122f50;
+  --surface-inverse: var(--paper);
+
+  /* Text */
+  --text-strong: #eef4fb;
+  --text-body: #c3d2e4;
+  --text-muted: #8fa3bc;
+  --text-faint: #647890;
+  --text-on-dark: #eef4fb;
+  --text-on-accent: #ffffff;
+  --text-link: var(--blue-300);
+  --text-link-hover: #a9cbec;
+
+  /* Brand / interactive — fill with a brighter blue so it reads on navy */
+  --brand: var(--blue-500);
+  --brand-strong: var(--blue-400);
+  --accent: var(--accent-bright);
+  --accent-hover: var(--blue-300);
+
+  /* Borders & dividers */
+  --border-subtle: var(--navy-line);
+  --border-default: #294d72;
+  --border-strong: #3d6592;
+  --border-focus: var(--accent-bright);
+  --divider: var(--navy-line);
+
+  /* Status — lighter foregrounds, deep translucent fills on dark */
+  --status-success: #3fb985;
+  --status-success-bg: rgba(63, 185, 133, 0.14);
+  --status-warning: #e0a93a;
+  --status-warning-bg: rgba(224, 169, 58, 0.14);
+  --status-danger: #e57464;
+  --status-danger-bg: rgba(229, 116, 100, 0.14);
+  --status-highlight: var(--coral-500);
+
+  /* Focus ring — brighter on dark */
+  --ring: 0 0 0 3px rgba(79, 141, 214, 0.42);
+}
