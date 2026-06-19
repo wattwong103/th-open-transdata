@@ -1,61 +1,214 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en" data-theme="dark">
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="css/arf.css" />
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <title> TODM </title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Watcharapong Wongkaew</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    overflow: hidden;
+  }
+  .page {
+    position: relative;
+    height: 100vh;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 34px clamp(24px, 5vw, 72px) 30px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    z-index: 2;
+  }
+
+  /* faint transit-network texture, top-right */
+  .bg-net {
+    position: fixed;
+    top: -80px; right: -120px;
+    width: 720px; height: 720px;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---- top bar ---- */
+  .topbar { display: flex; align-items: center; justify-content: space-between; }
+  .brand {
+    display: flex; align-items: center; gap: 11px;
+    font-family: var(--font-display); font-weight: 700; font-size: 19px;
+    letter-spacing: -0.02em; color: var(--text-strong);
+  }
+  .brand .dot { color: var(--accent); }
+  .meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); letter-spacing: 0.04em; }
+
+  /* ---- hero ---- */
+  .hero { align-self: center; }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: clamp(11px, 1vw, 13px);
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 12px; margin: 0 0 clamp(18px, 2.4vh, 30px);
+  }
+  .eyebrow::before { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .65; }
+
+  .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(54px, 11.5vw, 168px);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    margin: 0;
+    color: var(--text-strong);
+  }
+  .name .surname {
+    background: linear-gradient(100deg, #E8633F 0%, #4F8DD6 52%, #2FB6A8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  .subtext {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(20px, 2.7vw, 36px);
+    line-height: 1.2;
+    color: var(--text-body);
+    margin: clamp(22px, 3.2vh, 40px) 0 0;
+    max-width: 18ch;
+  }
+
+  .enter {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-top: clamp(26px, 3.6vh, 46px);
+    font-family: var(--font-sans); font-weight: 500; font-size: 16px;
+    color: var(--text-on-accent); text-decoration: none;
+    background: var(--brand); border: 1px solid var(--brand);
+    padding: 13px 26px; border-radius: var(--radius-sm);
+    transition: background var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard);
+  }
+  .enter:hover { background: var(--brand-strong); transform: translateX(3px); }
+  .enter .arr { transition: transform var(--duration-base) var(--ease-standard); }
+  .enter:hover .arr { transform: translateX(4px); }
+
+  /* ---- wayfinding route (nav) ---- */
+  .route { position: relative; padding-top: 26px; }
+  .route .rail {
+    position: absolute; left: 0; right: 0; top: 32px; height: 2px;
+    background: linear-gradient(90deg, #E8633F 0%, #4F8DD6 52%, #2FB6A8 100%);
+    opacity: .9; border-radius: 2px;
+  }
+  .stations { position: relative; display: flex; justify-content: space-between; gap: 12px; }
+  .station {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+    text-decoration: none; flex: 1;
+  }
+  .station:last-child { align-items: flex-end; }
+  .station .dot {
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--surface-page); border: 3px solid var(--text-faint);
+    transition: border-color var(--duration-base) var(--ease-standard),
+                transform var(--duration-base) var(--ease-standard);
+  }
+  .station .lab {
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em;
+    color: var(--text-muted);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+  .station:hover .dot { border-color: var(--accent); transform: scale(1.25); }
+  .station:hover .lab { color: var(--text-strong); }
+
+  /* ---- bottom meta ---- */
+  .footmeta {
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); letter-spacing: 0.04em;
+  }
+
+  /* ---- motion ---- */
+  .hero { animation: heroIn 0.85s var(--ease-out); }
+  @keyframes heroIn { from { opacity: 0.35; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .hero { animation: none; } }
+
+  @media (max-width: 640px) {
+    .meta, .footmeta { font-size: 10px; }
+    .subtext { max-width: 100%; }
+    .stations { flex-wrap: wrap; row-gap: 18px; }
+    .route .rail { display: none; }
+  }
+</style>
 </head>
-
 <body>
-  <div id="body">
-    <div id="header">
-      TODM: Transportation Open Data Map
-      <hr />
+  <!-- faint transit-network texture -->
+  <svg class="bg-net" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#4F8DD6" stroke-width="3">
+      <path d="M20 120 L160 120 L220 60 L380 60" />
+      <path d="M40 300 L40 200 L140 100" />
+      <path d="M120 380 L260 240 L260 120 L360 120" />
+      <path d="M0 240 L120 240 L200 320 L400 320" />
+    </g>
+    <g fill="#E8633F">
+      <circle cx="160" cy="120" r="6" />
+      <circle cx="260" cy="240" r="6" />
+      <circle cx="140" cy="100" r="6" />
+    </g>
+    <g fill="#2FB6A8">
+      <circle cx="220" cy="60" r="6" />
+      <circle cx="200" cy="320" r="6" />
+      <circle cx="260" cy="120" r="6" />
+    </g>
+  </svg>
+
+  <div class="page">
+    <!-- top bar -->
+    <div class="topbar">
+      <div class="brand">
+        <img src="assets/favicon.svg" width="28" height="28" alt="" />
+        <span>W<span class="dot">.</span>Wongkaew</span>
+      </div>
+      <div class="meta">BANGKOK&nbsp;&nbsp;⇄&nbsp;&nbsp;TOKYO</div>
+    </div>
+
+    <!-- hero -->
+    <div class="hero">
+      <p class="eyebrow">Transportation · Urban Mobility · AI</p>
+      <h1 class="name">
+        <span style="display:block;">Watcharapong</span>
+        <span class="surname" style="display:block;">Wongkaew</span>
+      </h1>
+      <p class="subtext">Moving cities, modelling futures.</p>
+      <a class="enter" href="site.html">Enter the site <span class="arr">→</span></a>
+    </div>
+
+    <!-- wayfinding nav -->
+    <nav class="route" aria-label="Site sections">
+      <div class="rail"></div>
+      <div class="stations">
+        <a class="station" href="site.html#about">
+          <span class="dot"></span><span class="lab">About</span>
+        </a>
+        <a class="station" href="site.html#publications">
+          <span class="dot"></span><span class="lab">Publications</span>
+        </a>
+        <a class="station" href="site.html#projects">
+          <span class="dot"></span><span class="lab">Projects</span>
+        </a>
+        <a class="station" href="site.html#blog">
+          <span class="dot"></span><span class="lab">Blog</span>
+        </a>
+        <a class="station" href="todm.html">
+          <span class="dot"></span><span class="lab">Data Map ↗</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- bottom meta -->
+    <div class="footmeta">
+      <span>Civil Engineering · The University of Tokyo</span>
+      <span>© 2026</span>
     </div>
   </div>
-
-  <script src="js/arf.js"></script>
-
-  <div class="legend">
-    <p>(G) - Indicates a link that is government-owned<br>
-      (O) - Indicates a link that is an open-source project<br>
-      (R) - Requires registration<br>
-      (NA) - Indicates a link that may or may not contain any usable data<br>
-      (C) - Indicates a link that may contain commercial data<br>
-    </p>
-  </div>
-
-  <div class="info-sections">
-    <div class="info-card">
-      <h3>Notes</h3>
-      <p>TODM focused on gathering information from free tools or open resources in the same place. The intention is to help
-      people find free resources. Some of the sites included might require registration or offer more data for a cost.</p>
-      <p>I originally created this mapping with an transportation infrastructure point of view. I would love to include any
-        other resources, especially from fields outside of transportation. Please let me know about anything that might be
-        missing!</p>
-    </div>
-
-    <div class="info-card">
-      <h3>For Update Notifications</h3>
-      <p>Mail me on: <a href="mailto:watcharapong.w@chula.ac.th">watcharapong.w@chula.ac.th</a><br>
-      Watch or star the project on Github: <a href="https://github.com/wattwong103">Github</a></p>
-    </div>
-
-    <div class="info-card">
-      <h3>Suggestions, Comments, Feedback</h3>
-      <p>Feedback or new tool suggestions are extremely welcome! Please feel free to reach out via email or submit a pull
-      request on Github.</p>
-    </div>
-
-    <div class="info-card">
-      <h3>Created by W. Wongkaew</h3>
-    </div>
-  </div>
-
 </body>
-
 </html>
