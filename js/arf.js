@@ -5,15 +5,18 @@
    Node colors mirror the design-system dataviz tokens.
    ============================================================= */
 
-var margin = [20, 60, 20, 60],
-    width = window.innerWidth - margin[1] - margin[3],
-    height = window.innerHeight * 0.9 - margin[0] - margin[2],
+// Fixed row/column spacing (instead of squeezing the tree into the
+// viewport) so labels never overlap; the canvas grows to fit instead.
+var ROW = 20,   // px between sibling rows
+    COL = 250,  // px between depth columns
+    PAD = { top: 24, right: 340, bottom: 32, left: 230 }, // left fits the root label
     i = 0,
-    duration = 1250,
+    duration = 450,
     root;
 
 var tree = d3.tree()
-    .size([height, width]);
+    .nodeSize([ROW, COL])
+    .separation(function(a, b) { return a.parent === b.parent ? 1 : 1.5; });
 
 var diagonal = d3.linkHorizontal()
     .x(d => d.y)
@@ -39,27 +42,32 @@ function nodeStroke(d) {
   return "#5fcabd";
 }
 
-/* ---- SVG canvas with zoom ---- */
+/* ---- SVG canvas with zoom ----
+   zoomLayer carries the user's pan/zoom; vis carries the layout offset,
+   so zooming never discards the offset. Wheel zoom needs Ctrl/⌘ (or a
+   trackpad pinch) so scrolling the page over the tree still scrolls. */
 var zoom = d3.zoom()
     .scaleExtent([0.3, 3])
-    .on("zoom", (event) => {
-      vis.attr("transform", event.transform);
+    .filter(function(event) {
+      return event.type === "wheel" ? (event.ctrlKey || event.metaKey) : !event.button;
+    })
+    .on("zoom", function(event) {
+      zoomLayer.attr("transform", event.transform);
     });
 
 var svg = d3.select("#body").append("svg")
-    .attr("width", width + margin[1] + margin[3])
-    .attr("height", height + margin[0] + margin[2])
-    .call(zoom);
+    .call(zoom)
+    .on("dblclick.zoom", null);
 
-var vis = svg.append("g")
-    .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+var zoomLayer = svg.append("g");
+var vis = zoomLayer.append("g");
 
 d3.json("arf.json")
   .then(function(json) {
     if (!json) return;
 
     root = d3.hierarchy(json);
-    root.x0 = height / 2;
+    root.x0 = 0;
     root.y0 = 0;
 
     // Build the flat search index from the full hierarchy (before collapse).
@@ -94,8 +102,18 @@ function update(source) {
   var treeData = tree(root);
   var nodes = treeData.descendants().reverse();
 
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 180; });
+  // Size the canvas to the laid-out tree and offset it into view.
+  var xMin = Infinity, xMax = -Infinity, maxDepth = 0;
+  treeData.each(function(d) {
+    if (d.x < xMin) xMin = d.x;
+    if (d.x > xMax) xMax = d.x;
+    if (d.depth > maxDepth) maxDepth = d.depth;
+  });
+  svg.attr("width", Math.max(window.innerWidth, PAD.left + maxDepth * COL + PAD.right))
+     .attr("height", xMax - xMin + PAD.top + PAD.bottom);
+  vis.transition()
+      .duration(duration)
+      .attr("transform", "translate(" + PAD.left + "," + (PAD.top - xMin) + ")");
 
   // Update the nodes…
   var node = vis.selectAll("g.node")
@@ -300,6 +318,9 @@ function setupFind() {
   if (!searchInput) return;
 
   searchInput.placeholder = 'Search ' + flatIndex.length + ' open-data sources…';
+  document.querySelectorAll('[data-source-count]').forEach(function(el) {
+    el.textContent = flatIndex.length;
+  });
 
   function renderResults(matches) {
     countEl.innerHTML = '<strong>' + matches.length + '</strong> ' +
