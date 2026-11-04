@@ -13,7 +13,7 @@
             {
               "name": "Road Domestic Transport Volume (G)",
               "type": "url",
-              "url": "https://uat.data.go.th/en/dataset/road-domestic-transport-volume",
+              "url": "https://datagov.mot.go.th/en/dataset/road-domestic-transport-volume",
               "description": "Road freight transport volumes within Thailand"
             },
             {
@@ -35,12 +35,6 @@
               "description": "Traffic data, annual reports, interesting statistics"
             },
             {
-              "name": "Bangkok Traffic Management (G)",
-              "type": "url",
-              "url": "https://traffic.bangkok.go.th",
-              "description": "Real-time traffic conditions and camera feeds in Bangkok"
-            },
-            {
               "name": "Thailand Traffic Data Portal (G)(O)",
               "type": "url",
               "url": "https://data.go.th/dataset?tags=traffic",
@@ -51,6 +45,12 @@
               "type": "url",
               "url": "https://data.go.th/dataset?tags=road+safety",
               "description": "Road accident statistics and road safety information"
+            },
+            {
+              "name": "Road Accident Statistics - MOT (G)(O)",
+              "type": "url",
+              "url": "https://datagov.mot.go.th/en/dataset/number-of-road-accidents-in-the-country",
+              "description": "Nationwide road accident counts on the Ministry of Transport data catalog"
             }
           ],
           "name": "Thailand Government Agencies",
@@ -68,7 +68,7 @@
               "name": "Bangkok Traffic Management Center (G)",
               "type": "url",
               "url": "https://traffic.bangkok.go.th",
-              "description": "Real-time traffic monitoring, CCTV feeds, incident reports"
+              "description": "Real-time traffic conditions, CCTV feeds and incident reports"
             },
             {
               "name": "Traffy Fondue Bangkok (O)",
@@ -111,11 +111,6 @@
               "name": "TRAVIC - Public Transportation Tracking (O)",
               "type": "url",
               "url": "http://tracker.geops.ch/"
-            },
-            {
-              "name": "Vehicle Specifications Lookup (C)",
-              "type": "url",
-              "url": "https://berla.co/products/ive/vehicle-lookup/"
             },
             {
               "name": "License Plate Search (C)",
@@ -201,7 +196,7 @@
             {
               "name": "Air Transport Volume Data (G)",
               "type": "url",
-              "url": "https://uat.data.go.th/en/dataset/air-freight-pass",
+              "url": "https://datagov.mot.go.th/en/dataset/air-freight-pass",
               "description": "Flight numbers, passenger counts, freight volumes"
             },
             {
@@ -246,6 +241,18 @@
               "name": "ADS-B.NL (O)",
               "type": "url",
               "url": "https://www.ads-b.nl/index.php?pageno=9999"
+            },
+            {
+              "name": "OpenSky Network (O)(R)",
+              "type": "url",
+              "url": "https://opensky-network.org/",
+              "description": "ADS-B flight data for research; historical data access requires registration"
+            },
+            {
+              "name": "OurAirports (O)",
+              "type": "url",
+              "url": "https://ourairports.com/data/",
+              "description": "Public-domain airport, runway and navaid data as CSV downloads"
             }
           ],
           "name": "International Air Traffic Records",
@@ -356,13 +363,31 @@
               "description": "Consolidated Bangkok public transit datasets"
             },
             {
-              "name": "Electric Train Data Portal (G)",
+              "name": "Thai Open Transit (O)",
               "type": "url",
-              "url": "https://drt.gdcatalog.go.th",
-              "description": "Electric rail system performance and passenger data"
+              "url": "https://github.com/Nukaze/thai-open-transit",
+              "description": "Versioned open dataset of Bangkok's rail transit lines and stations (ODbL)"
             }
           ],
           "name": "Thailand Urban Transit",
+          "type": "folder"
+        },
+        {
+          "children": [
+            {
+              "name": "Mobility Database (O)",
+              "type": "url",
+              "url": "https://mobilitydatabase.org/",
+              "description": "Global catalog of GTFS and GBFS transit feeds, maintained by MobilityData"
+            },
+            {
+              "name": "Transitland (O)",
+              "type": "url",
+              "url": "https://www.transit.land/",
+              "description": "Open aggregator of GTFS transit feeds with a route map and API"
+            }
+          ],
+          "name": "International Transit Feeds",
           "type": "folder"
         }
       ],
@@ -380,22 +405,16 @@
               "description": "Map of electric vehicle charging stations across Thailand"
             },
             {
-              "name": "Provincial Electricity Authority EV Data (G)",
+              "name": "PEA VOLTA EV Charging (G)",
               "type": "url",
-              "url": "https://www.pea.co.th/ev",
-              "description": "PEA electric vehicle charging infrastructure"
+              "url": "https://www.pea.co.th/en/knowledge/ev-charging",
+              "description": "PEA VOLTA charging stations, station map, app and charging rates"
             },
             {
               "name": "Thailand EV Database (O)",
               "type": "url",
               "url": "https://www.evat.or.th",
               "description": "Electric Vehicle Association of Thailand data"
-            },
-            {
-              "name": "Bangkok Traffic Info - Traffy Fondue (O)",
-              "type": "url",
-              "url": "https://traffy.in.th",
-              "description": "Crowdsourced traffic and infrastructure issues"
             },
             {
               "name": "Smart Mobility Data Portal (G)",
@@ -420,6 +439,12 @@
               "type": "url",
               "url": "https://lineman.line.me",
               "description": "Food delivery and logistics, owned by LINE Thailand"
+            },
+            {
+              "name": "Open Charge Map (O)",
+              "type": "url",
+              "url": "https://openchargemap.org/",
+              "description": "Crowdsourced global registry of EV charging locations, with an open API"
             }
           ],
           "name": "Thailand Emerging Mobility",
@@ -649,7 +674,7 @@
             {
               "name": "GPSVisualizer",
               "type": "url",
-              "url": "http://www.gpsvisualizer.com/geocode"
+              "url": "https://www.gpsvisualizer.com/geocoder/"
             },
             {
               "name": "Military Grid Reference System Coordinates",
@@ -681,11 +706,6 @@
               "name": "Hyperlapse (T)",
               "type": "url",
               "url": "https://github.com/TeehanLax/Hyperlapse.js"
-            },
-            {
-              "name": "Teehan+Lax Labs - Hyperlapse",
-              "type": "url",
-              "url": "http://labs.teehanlax.com/project/hyperlapse"
             },
             {
               "name": "Google Maps Streetview Player",
@@ -750,22 +770,18 @@
         {
           "name": "OpenStreetMap (O)",
           "type": "url",
-          "url": "http://www.openstreetmap.org/#map=5/40.614/-100.679"
+          "url": "https://www.openstreetmap.org/#map=6/13.04/101.49"
         },
         {
-          "name": "Flash Earth",
+          "name": "Zoom Earth",
           "type": "url",
-          "url": "http://www.flashearth.com/"
+          "url": "https://zoom.earth/",
+          "description": "Near real-time satellite imagery and weather maps (successor to Flash Earth)"
         },
         {
           "name": "Historic Aerials",
           "type": "url",
           "url": "http://www.historicaerials.com/?javascript=&"
-        },
-        {
-          "name": "Google Maps Update Alerts",
-          "type": "url",
-          "url": "https://followyourworld.appspot.com/"
         },
         {
           "name": "Google Earth Overlays",
@@ -803,19 +819,15 @@
           "url": "http://map.naver.com/"
         },
         {
-          "name": "OpenStreetMap",
-          "type": "url",
-          "url": "http://www.openstreetmap.org/#map=5/51.500/-0.100"
-        },
-        {
           "name": "EarthExplorer",
           "type": "url",
           "url": "https://earthexplorer.usgs.gov/"
         },
         {
-          "name": "OpenStreetCam",
+          "name": "KartaView (O)",
           "type": "url",
-          "url": "http://openstreetcam.org/"
+          "url": "https://kartaview.org/",
+          "description": "Open street-level imagery (formerly OpenStreetCam)"
         },
         {
           "name": "Travel by Drone",
@@ -840,7 +852,7 @@
         {
           "name": "NEXRAD Data Inventory Search",
           "type": "url",
-          "url": "https://www.ncdc.noaa.gov/nexradinv/"
+          "url": "https://www.ncei.noaa.gov/nexradinv/"
         },
         {
           "name": "MapQuest",
@@ -848,14 +860,9 @@
           "url": "https://www.mapquest.com/"
         },
         {
-          "name": "OpenRailwayMap",
-          "type": "url",
-          "url": "http://www.openrailwaymap.org/"
-        },
-        {
           "name": "OpenInfrastructureMap",
           "type": "url",
-          "url": "openinframap.org/"
+          "url": "https://openinframap.org/"
         },
         {
           "name": "OpenStreetMap Routing Service",
@@ -876,6 +883,12 @@
           "name": "Wayback Imagery",
           "type": "url",
           "url": "https://livingatlas.arcgis.com/wayback/"
+        },
+        {
+          "name": "Overture Maps (O)",
+          "type": "url",
+          "url": "https://overturemaps.org/",
+          "description": "Open global map data, including a transportation (road network) theme"
         }
       ],
       "name": "Geolocation Tools / Maps",

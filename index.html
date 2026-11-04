@@ -22,8 +22,15 @@
       <img class="brand__mark" src="assets/favicon.svg" alt="" width="26" height="26" />
       <span class="brand__name">W.&#8202;Wongkaew<span class="brand__dot">.</span></span>
     </a>
-    <span class="topbar__title">TODM — Transportation Open Data Map</span>
+    <span class="topbar__title">TODM</span>
   </header>
+
+  <!-- ---------- Intro ---------- -->
+  <section class="intro">
+    <h1 class="intro__title">Transportation open data map</h1>
+    <p class="intro__lede">A curated directory of <span data-source-count>126</span> free and open data sources for
+      transport in Thailand, plus international tools. Browse the map, or search and filter by tag to find a source.</p>
+  </section>
 
   <!-- ---------- Find bar: search + tag facets ---------- -->
   <section class="findbar" aria-label="Find open-data sources">
@@ -75,35 +82,30 @@
   <!-- ---------- Info ---------- -->
   <section class="info-sections">
     <article class="info-card">
-      <h3>Notes</h3>
-      <p>TODM focuses on gathering information from free tools and open resources in one place. The intention is to help
-        people find free resources. Some of the sites included might require registration or offer more data for a cost.
-      </p>
-      <p>I originally created this mapping with a transportation-infrastructure point of view. I would love to include
-        any other resources, especially from fields outside of transportation. Please let me know about anything that
-        might be missing!</p>
+      <h3>About this directory</h3>
+      <p>TODM gathers free tools and open data sources for transportation in one place, so they are easier to find.
+        Some sources require registration or charge for fuller access; the tags on each source say which.</p>
+      <p>The list started from a transport-infrastructure point of view. Sources from related fields, such as land use,
+        environment and energy, are welcome.</p>
     </article>
 
     <article class="info-card">
-      <h3>For update notifications</h3>
-      <p>Mail me at <a href="mailto:watcharapong.w@chula.ac.th">watcharapong.w@chula.ac.th</a><br />
-        Watch or star the project on <a href="https://github.com/wattwong103" target="_blank" rel="noopener">GitHub</a>.
-      </p>
+      <h3>Stay updated</h3>
+      <p>Watch or star the <a href="https://github.com/wattwong103/th-open-transdata" target="_blank"
+          rel="noopener">repository on GitHub</a> to hear about new sources, or email
+        <a href="mailto:watcharapong.w@chula.ac.th">watcharapong.w@chula.ac.th</a>.</p>
     </article>
 
     <article class="info-card">
-      <h3>Suggestions, comments, feedback</h3>
-      <p>Feedback or new tool suggestions are extremely welcome! Please feel free to reach out via email or submit a
-        pull request on GitHub.</p>
-    </article>
-
-    <article class="info-card info-card--byline">
-      <h3>Created by W. Wongkaew</h3>
+      <h3>Suggest a source</h3>
+      <p>Know a source that is missing, has moved or no longer works? Send an email, or open a pull request that edits
+        <code>arf.json</code> on <a href="https://github.com/wattwong103/th-open-transdata" target="_blank"
+          rel="noopener">GitHub</a>.</p>
     </article>
   </section>
 
   <footer class="footer">
-    <p>TODM — Transportation Open Data Map · Created by W. Wongkaew</p>
+    <p>TODM — Transportation Open Data Map · Created by W. Wongkaew · Sources reviewed November 2026</p>
   </footer>
 
   <script src="js/arf.js"></script>
